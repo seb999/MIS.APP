@@ -1,0 +1,184 @@
+<h3>Activity detail</h3>
+
+<div *ngIf="showLoadedactivity" class="overlay"></div>
+<div *ngIf="showLoaded" id="loaderModernize"></div>
+
+
+<div class="row">
+
+    <div class="col-6">
+
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                {{activity?.activityCode}}
+            </div>
+
+            <div class="card-block">
+                <div class="row" style="padding:0px !important;margin:0px !important">
+                    <div class="col-6" style="padding:0px !important;margin:0px !important">
+                        <ul class="list-group" style="padding:0px !important;margin:0px !important">
+                            <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                <h6>Created</h6>
+                                {{activity?.dateAdded | date : 'dd/MM/yyyy'}}
+                            </li>
+                            <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                <h6>Activity Id</h6>
+                                {{activity?.activityId}}
+                            </li>
+                            <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                <h6>Status</h6>
+                                {{activity?.statusName}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6" style="padding:0px !important;margin:0px !important">
+                        <ul class="list-group" style="padding:0px">
+                            <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                <h6>AWP</h6>
+                                {{activity?.awpName}}
+                            </li>
+                            <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                <h6>Start date</h6>
+                                {{activity?.startDate | date : 'dd/MM/yyyy'}}
+                            </li>
+                            <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                <h6>End date</h6>
+                                {{activity?.endDate | date : 'dd/MM/yyyy'}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br/>
+
+        <div class="card ">
+            <div class="card-header bg-info text-white">
+                Summary
+            </div>
+            <div class="card-block">
+
+                <ul class="list-group" style="padding:0px">
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>Activity name</h6>
+                        {{activity?.activityName}}
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <div style="float:left">
+                            <h6>Activity leader</h6>
+                            {{activity?.activityLeader}}
+                        </div>
+                        <div style="float:right">
+                            <div class="mx-auto"><img src="data:image/JPEG;base64,{{activity?.activityLeaderPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" /></div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>Description</h6>
+                        {{activity?.activityDescription}}
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>Strategy</h6>
+                        {{activity?.strategyCode}}
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>Unit</h6>
+                        {{activity?.unitCode}}
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>DP</h6>
+                        {{activity?.dpCode}}
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>Section</h6>
+                        {{activity?.sectionCode}}
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>Capacity level</h6>
+                        {{activity?.CapacityLevel}}
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>Project</h6>
+                        {{activity?.project}}
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>Functional group</h6>
+                        {{activity?.functionalGroup}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+
+       
+
+
+
+
+        <div class="card ">
+            <div class="card-header bg-info text-white">
+                Ressources
+            </div>
+            <div class="card-block">
+
+
+                <ul class="list-group" style="padding:0px">
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px" *ngFor="let expense of activity?.expenseList">
+
+                        <h6 class="m-2">{{expense?.expenseId}} - {{expense?.expenseName}}</h6>
+
+                        <div class="card-deck m-1">
+
+                            <div class="card bg-light" *ngFor="let expenseStaff of expense?.expenseStaffList" style="max-width:250px;min-width:250px">
+                                <div class="card-header" style="padding:5px;background-color:rgb(182, 205, 221);">
+                                    <img src="../../../../wwwroot/images/DefaultUser.png" class="img-rounded" height="30">
+                                    {{expenseStaff?.staffName}}
+                                </div>
+
+                                <div class="card-body" style="padding:5px">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h6>Planned days</h6>
+                                            {{expenseStaff?.planDay}}
+                                        </div>
+                                        <div class="col-6">
+                                            <h6>Planned FTEs</h6>
+                                            {{expenseStaff?.planFte}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h6>Days actual</h6>
+                                            <div *ngIf="displayFte || currentUser?.userId == expenseStaff?.staffId">{{expenseStaff?.actualDay}}</div>
+                                            <div *ngIf="displayFte || currentUser?.userId == expenseStaff?.staffId">{{expenseStaff?.actualFte}}</div>
+                                        </div>
+                                        <div class="col-6">
+                                            <h6>FTEs actual</h6>
+                                            <div *ngIf="!displayFte && currentUser?.userId != expenseStaff?.staffId"><i style="color:red" class="glyphicon glyphicon-ban-circle"></i></div>
+                                            <div *ngIf="!displayFte && currentUser?.UserId != expenseStaff?.staffId"><i style="color:red" class="glyphicon glyphicon-ban-circle"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </li>
+                    </ul>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row mt-4">
+
+    <div class="col-6">
+
+       
+    </div>
+
+</div>

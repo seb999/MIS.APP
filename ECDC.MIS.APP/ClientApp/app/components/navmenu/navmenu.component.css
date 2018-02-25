@@ -1,0 +1,29 @@
+.navbar-inverse .navbar-text {
+    color: #ffffff;
+}
+
+.navbar .brand, .navbar .nav > li > a {
+    color: mintcream;
+    font-weight: 400;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+    .navbar .brand, .navbar .nav > li > a:hover {
+        color: limegreen;
+    }
+
+.nav-tabs > li > a {
+    background-color: #f8f5f0;
+    border-color: #dfd7ca;
+    color: #98978b;
+}
+
+
+.navbar-divider-vertical {
+    height: 20px;
+    background-color: white;
+    border-left: 2px solid white;
+    float: left;
+    margin-top: 15px;
+}

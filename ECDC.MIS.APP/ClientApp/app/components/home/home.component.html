@@ -1,0 +1,235 @@
+<h3>Home</h3>
+
+<div *ngIf="showLoaded" class="overlay"></div>
+<div *ngIf="showLoaded" id="loaderModernize"></div>
+
+
+
+<!--Year filter-->
+<div class="dropdown" style="float:left;margin-top:7px;">Year&nbsp;</div>
+<div class="dropdown" style="float:left;">
+    <select class="mySelect form-control input-sm " [(ngModel)]="selectedAwp" (ngModelChange)="getUserFte()">
+        <option *ngFor="let awp of awpList" [ngValue]="awp"> {{awp.text}} </option>
+    </select>
+</div>
+
+<form class="form-inline">
+    <div class="form-group">
+        <div class="input-group">
+            <input class="form-control" placeholder="dd/mm/yyyy"
+                   name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <i class="fa fa-calendar-alt"></i>
+                    <!--<img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />-->
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch Bootstrap 4 modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button type="button" class="btn btn-outline-secondary" placement="top" style="float:right;margin-top:7px;"
+        ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." popoverTitle="Popover on top">
+    Popover from ng-boostrap
+</button>
+
+<button type="button" class="btn btn-outline-secondary" placement="top" ngbTooltip="Tooltip on top">
+    Tooltip on top
+</button>
+
+
+<!--<form class="form-inline">
+    <div class="form-group">
+        <div class="input-group">
+            <input class="form-control" placeholder="dd-mm-yyyy"
+                   name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>-->
+
+<div style="clear:both; font-size:1px;"></div>
+<br>
+
+<div class="row">
+    <div class="col-3">
+        <!--Profile block-->
+        <div class="card ">
+            <div class="card-header bg-info text-white">
+                My profile
+            </div>
+            <div class="card-block">
+
+                <ul class="list-group" style="padding:0px">
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <div style="float:left">
+                            <h6>Login</h6>
+                            {{userProfile?.userLoginName}}
+                        </div>
+                        <div style="float:right">
+                            <div class="mx-auto"><img src="data:image/JPEG;base64,{{userProfile?.userPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" /></div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>Name</h6>
+                        {{userProfile?.userFullName}}
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6>Unit</h6>
+                                {{userProfile?.unit.unitCode}}
+                            </div>
+                            <div class="col-4">
+                                <h6>DP</h6>
+                                {{userProfile?.dsp.dspCode}}
+                            </div>
+                            <div class="col-4">
+                                <h6>Section</h6>
+                                {{userProfile?.section.sectionCode}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>DP</h6>
+                        {{userProfile?.dsp.dspCode}}
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>Section</h6>
+                        {{userProfile?.section.sectionCode}}
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>Grade</h6>
+                        {{userProfile?.userGrade.userGradeName}}
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <h6>Role</h6>
+                        {{userProfile?.userRole.userRoleName}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-9">
+        <!--My activity-->
+        <div class="card">
+            <div class="card-header bg-info text-white">My activities</div>
+            <div class="card-block" style="height:100%">
+                <table class="table table-striped table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>Activity code</th>
+                            <th>Activity name</th>
+                            <th>Strategy</th>
+                            <th>Unit</th>
+                            <th>DP</th>
+                            <th>Activity leader</th>
+                            <th>Awp</th>
+                            <th>Budget</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let activity of activityList" ng-repeat="activity in activityList" style="cursor:pointer" [routerLink]="['/activityDetail', activity.activityId]">
+                            <td>{{activity.activityCode}}</td>
+                            <td>{{activity.activityName}}</td>
+                            <td>{{activity.strategyCode}}</td>
+                            <td>{{activity.unitCode}}</td>
+                            <td>{{activity.dpCode}}</td>
+                            <td>{{activity.activityLeader}}</td>
+                            <td>{{activity.awpName}}</td>
+                            <td>{{activity.amount}}</td>
+                            <td>
+                                <img src={{activity.statusIcon}} />
+                                {{activity.statusName}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <!--Chart-->
+        <div class="card ">
+            <div class="card-header bg-info text-white">
+                &nbsp;
+            </div>
+            <div class="card-block">
+                <div style="padding-left:0px">
+                    <div #chartTarget style="height:300px"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-9">
+
+        <!--My  time allocated-->
+        <div class="card">
+            <div class="card-header bg-info text-white">My time allocated</div>
+            <div class="card-block">
+
+                <table class="table table-bordered table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>Activity code</th>
+                            <th>Activity name</th>
+                            <th>Expense name</th>
+                            <th>Planned days</th>
+                            <th>Planned FTEs</th>
+                            <th>Days actual</th>
+                            <th>FTEs actual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let expenseStaff of expenseStaffList" style="cursor:pointer">
+                            <td>fdsfds{{expenseStaff.activityCode}}</td>
+                            <td>{{expenseStaff.activityName}}</td>
+                            <td>{{expenseStaff.expenseName}}</td>
+                            <td>{{expenseStaff.planDay}}</td>
+                            <td>{{expenseStaff.planFte}}</td>
+                            <td>{{expenseStaff.actualDay}}</td>
+                            <td>{{expenseStaff.actualFte}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
