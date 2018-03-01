@@ -1,5 +1,5 @@
 ﻿//Seb : put only properties you want to filter
-export class Activity {
+export interface Activity {
     activityId: string;
     activityName: string;
     activityCode: string;

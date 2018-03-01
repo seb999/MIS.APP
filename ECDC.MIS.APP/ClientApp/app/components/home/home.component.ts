@@ -67,6 +67,7 @@ export class HomeComponent {
     getUserProfile(): any {
         let url = this.webServiceUrl + "/lookupUser/GetCurrentUser";
         this.http.get(url, { withCredentials:true }).subscribe(data => {
+            
             this.userProfile = data.json();
             this.showLoaded = false;
         }, err => null);

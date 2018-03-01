@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2 masterStyle">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
     <a class='navbar-brand' (click)="clearCache();"><img src="../../../../wwwroot/images/logo_ecdc.png" alt="LogoEcdc" class="navbar-left" width="100"></a>
     <a class='navbar-brand' [routerLink]="['/home']" style="font-size:xx-large;color:white;margin-top:15px">MIS</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@
                     <a [routerLink]="['/meeting']" class="dropdown-item" href="#">Meeting</a>
                     <a [routerLink]="['/procurement']" class="dropdown-item" href="#">Procurement</a>
                     <div class="dropdown-divider"></div>
-                    <a [routerLink]="['/activity']" class="dropdown-item" href="#">Request new Expense</a>
+                    <a [routerLink]="['/requestExpense']" class="dropdown-item" href="#">Request new Expense</a>
                     <a [routerLink]="['/activity']" class="dropdown-item" href="#">Request new FTE</a>
                 </div>
             </li>

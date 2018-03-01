@@ -1,30 +1,30 @@
 ﻿import { Pipe, PipeTransform } from '@angular/core';
-import { Activity } from './activity';
+import { Expense } from '../interface/expense.interface';
 
 @Pipe({
-    name: 'activityFilter',
+    name: 'expenseFilter',
     pure: false
 })
 
-export class ActivityFilterPipe implements PipeTransform {
-    transform(items: Activity[], filter: Activity): Activity[] {
+export class ExpenseFilterPipe implements PipeTransform {
+    transform(items: Expense[], filter: Expense): Expense[] {
     if (!items || !filter) {
       return items;
     }
     // filter items array, items which match and return true will be kept, false will be filtered out
-    return items.filter((item: Activity) => this.applyFilter(item, filter));
+    return items.filter((item: Expense) => this.applyFilter(item, filter));
   }
   
-    applyFilter(activity: Activity, filter: Activity): boolean {
+    applyFilter(expense: Expense, filter: Expense): boolean {
         for (let field in filter) {
 
       if (filter[field]) {
         if (typeof filter[field] === 'string') {
-          if (activity[field].toLowerCase().indexOf(filter[field].toLowerCase()) === -1) {
+          if (expense[field].toLowerCase().indexOf(filter[field].toLowerCase()) === -1) {
             return false;
           }
         } else if (typeof filter[field] === 'number') {
-            if (activity[field] !== filter[field]) {
+            if (expense[field] !== filter[field]) {
             return false;
           }
         }

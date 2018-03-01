@@ -93,48 +93,41 @@
                 <ul class="list-group" style="padding:0px">
                     <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
                         <div style="float:left">
-                            <h6>Login</h6>
-                            {{userProfile?.userLoginName}}
+                            <p class="label">Login</p>
+                            <p class="labelC">{{userProfile?.userLoginName}}</p>
                         </div>
                         <div style="float:right">
                             <div class="mx-auto"><img src="data:image/JPEG;base64,{{userProfile?.userPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" /></div>
                         </div>
                     </li>
                     <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                        <h6>Name</h6>
-                        {{userProfile?.userFullName}}
+                        <p class="label">Name</p>
+                        <p class="labelC">{{userProfile?.userFullName}}</p>
                     </li>
                     <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
                         <div class="row">
-                            <div class="col-4">
-                                <h6>Unit</h6>
-                                {{userProfile?.unit.unitCode}}
+                            <div class="col-3">
+                                <p class="label">Unit</p>
+                                <p class="labelC">{{userProfile?.unit.unitCode}}</p>
+                            </div>
+                            <div class="col-5">
+                                <p class="label">DP</p>
+                                <p class="labelC">{{userProfile?.dsp.dspCode}}</p>                            
                             </div>
                             <div class="col-4">
-                                <h6>DP</h6>
-                                {{userProfile?.dsp.dspCode}}
-                            </div>
-                            <div class="col-4">
-                                <h6>Section</h6>
-                                {{userProfile?.section.sectionCode}}
-                            </div>
+                                <p class="label">Section</p>
+                                <p class="labelC">{{userProfile?.section.sectionCode}}</p>                             
+                             </div>
                         </div>
                     </li>
                     <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                        <h6>DP</h6>
-                        {{userProfile?.dsp.dspCode}}
+                        <p class="label">Grade</p>
+                        <p class="labelC">{{userProfile?.userGrade.userGradeName}}</p>    
                     </li>
                     <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                        <h6>Section</h6>
-                        {{userProfile?.section.sectionCode}}
-                    </li>
-                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                        <h6>Grade</h6>
-                        {{userProfile?.userGrade.userGradeName}}
-                    </li>
-                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                        <h6>Role</h6>
-                        {{userProfile?.userRole.userRoleName}}
+                        <p class="label">Role</p>
+                        <p class="labelC">{{userProfile?.userRole.userRoleName}}</p>
+                        
                     </li>
                 </ul>
             </div>
@@ -182,12 +175,13 @@
 
     </div>
 </div>
+<div class="row">&nbsp;</div>
 <div class="row">
     <div class="col-3">
         <!--Chart-->
         <div class="card ">
             <div class="card-header bg-info text-white">
-                &nbsp;
+                    Distribution
             </div>
             <div class="card-block">
                 <div style="padding-left:0px">

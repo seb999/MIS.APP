@@ -1,4 +1,20 @@
 ﻿
+/*----------------------------------General font-----------------------------------*/
+.label{
+    font-size: 13px;
+    font-style: italic;
+    padding: 0px;
+    margin: 0px;
+}
+
+/* Label content */
+.labelC{
+    font-size: 15px;
+    color: cornflowerblue;
+    padding: 0px;
+    margin: 0px;
+}
+
 /*----------------------------------Table design-----------------------------------*/
 
 .table th{

@@ -16,7 +16,8 @@ export class NgbDateCustomParserFormatter extends NgbDateParserFormatter {
             //    return { day: toInteger(dateParts[0]), month: toInteger(dateParts[1]), year: toInteger(dateParts[2]) };
             //}
         }
-        return { day: undefined, month: undefined, year: undefined };
+        
+        return { day: 1, month: 1, year: 1977 };
     }
 
     format(date: NgbDateStruct): string {

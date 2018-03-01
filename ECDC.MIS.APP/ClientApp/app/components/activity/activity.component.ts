@@ -2,9 +2,9 @@ import { AfterViewInit, Component, OnInit, ViewChild, ElementRef, Inject } from 
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { LookupListItem } from '../shared/lookupListItem';
-import { Activity } from './activity';
-import { ActivityFilterPipe } from './activity-filter.pipe';
+import { ActivityFilterPipe } from '../shared/pipe/activity-filter.pipe';
 import { ColumnSortedEvent } from '../sortableTable/sort.service';
+import { Activity } from '../shared/interface/activity.interface';
 
 @Component({
     selector: 'activity',
@@ -15,17 +15,18 @@ import { ColumnSortedEvent } from '../sortableTable/sort.service';
 
 export class ActivityComponent {
 
-    public activityList: Activity[];
-    public awpList: LookupListItem[];
-    public strategyList: LookupListItem[];
-    public unitList: LookupListItem[];
-    public dpList: LookupListItem[];
-    public sectionList: LookupListItem[];
-    public leaderList: LookupListItem[];
-    public statusList: LookupListItem[];
+    public activityList: Activity[] = [] as any;
+    public awpList: LookupListItem[]= [] as any;
+    public strategyList: LookupListItem[]= [] as any;
+    public unitList: LookupListItem[]= [] as any;
+    public dpList: LookupListItem[]= [] as any;
+    public sectionList: LookupListItem[]= [] as any;
+    public leaderList: LookupListItem[]= [] as any;
+    public statusList: LookupListItem[]= [] as any;
 
     public selectedAwp: any;
-    public filter: Activity = new Activity();
+    public filter: Activity = {} as any;
+
     public selectedStrategy: any;
     public selectedUnit: any;
     public selectedDp: any;
@@ -100,7 +101,7 @@ export class ActivityComponent {
     }
 
     clearFilters() {
-        this.filter = new Activity();
+        this.filter = {} as any;
         this.filter.dpId = 0;
         this.filter.unitId = 0;
         this.filter.activityCode = "";
