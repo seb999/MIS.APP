@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule} from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
@@ -14,7 +13,10 @@ import { MeetingComponent } from './components/meeting/meeting.component';
 import { ProcurementComponent } from './components/procurement/procurement.component';
 import { ActivityDetailComponent } from './components/activityDetail/activityDetail.component';
 import { RequestExpenseComponent } from './components/requestExpense/requestExpense.component';
-
+import { SearchComponent } from './components/search/search.component';
+import { RequestActivityComponent } from './components/requestActivity/requestActivity.component';
+import { RequestFteComponent } from './components/requestFte/requestFte.component';
+import { BudgetTransferComponent } from './components/budgetTransfer/budgetTransfer.component';
 
 //Pipe and Directive
 import { ActivityFilterPipe } from './components/shared/pipe/activity-filter.pipe';
@@ -32,6 +34,10 @@ import { SortableColumnComponent } from './components/sortableTable/sortable-col
         ActivityComponent,
         ActivityDetailComponent,
         RequestExpenseComponent,
+        SearchComponent,
+        RequestActivityComponent,
+        RequestFteComponent,
+        BudgetTransferComponent,
 
         ActivityFilterPipe,
         ExpenseFilterPipe,
@@ -49,10 +55,15 @@ import { SortableColumnComponent } from './components/sortableTable/sortable-col
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'activity', component: ActivityComponent },
+            { path: ' /:activityId', component: ActivityDetailComponent },
             { path: 'meeting', component: MeetingComponent },
             { path: 'procurement', component: ProcurementComponent },
             { path: 'requestExpense', component: RequestExpenseComponent },
-            { path: 'activityDetail/:activityId', component: ActivityDetailComponent },
+            { path: 'search/:searchString', component: SearchComponent },
+            { path: 'requestActivity', component: RequestActivityComponent },
+            { path: 'requestFte', component: RequestFteComponent },
+            { path: 'budgetTransfer', component: BudgetTransferComponent },
+            
             { path: '**', redirectTo: 'home' }
         ])
         

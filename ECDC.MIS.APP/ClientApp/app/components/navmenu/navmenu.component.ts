@@ -11,6 +11,7 @@ export class NavMenuComponent {
 
     public webServiceUrl: string;
     public userProfile: any;
+    public searchString : string = "";
 
     constructor(public http: Http, private router: Router, @Inject('WEB_SERVICE_URL') apiUrl: string) {
         this.webServiceUrl = apiUrl;
@@ -37,5 +38,9 @@ export class NavMenuComponent {
         this.http.get(url, { withCredentials: true }).subscribe(data => {
             this.userProfile = data.json();
         }, err => null);
+    }
+
+    search(){
+        this.router.navigate(['/search',this.searchString]);
     }
 }

@@ -22,7 +22,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a [routerLink]="['/activity']" class="dropdown-item" href="#">Activity</a>
                     <div class="dropdown-divider"></div>
-                    <a [routerLink]="['/activity']" class="dropdown-item" href="#">Request new Activity</a>
+                    <a [routerLink]="['/requestActivity']" class="dropdown-item" href="#">Request new Activity</a>
                 </div>
             </li>
 
@@ -36,27 +36,27 @@
                     <a [routerLink]="['/procurement']" class="dropdown-item" href="#">Procurement</a>
                     <div class="dropdown-divider"></div>
                     <a [routerLink]="['/requestExpense']" class="dropdown-item" href="#">Request new Expense</a>
-                    <a [routerLink]="['/activity']" class="dropdown-item" href="#">Request new FTE</a>
+                    <a [routerLink]="['/requestFte']" class="dropdown-item" href="#">Request new FTE</a>
                 </div>
             </li>
 
             <li class="navbar-divider-vertical hidden-sm hidden-md hidden-xs"></li>
             <li class="nav-item active" [routerLinkActive]="['link-active']">
-                <a class="nav-link" [routerLink]="['/home']">
+                <a class="nav-link" [routerLink]="['/project']">
                     <i aria-hidden="true"></i> Project
                 </a>
             </li>
 
             <li class="navbar-divider-vertical hidden-sm hidden-md hidden-xs"></li>
             <li class="nav-item active" [routerLinkActive]="['link-active']">
-                <a class="nav-link" [routerLink]="['/home']">
+                <a class="nav-link" [routerLink]="['/budgetTransfer']">
                     <i aria-hidden="true"></i> Budget transfer
                 </a>
             </li>
 
             <li class="navbar-divider-vertical hidden-sm hidden-md hidden-xs"></li>
             <li class="nav-item active" [routerLinkActive]="['link-active']">
-                <a class="nav-link" [routerLink]="['/home']">
+                <a class="nav-link" [routerLink]="['/report']">
                     <i aria-hidden="true"></i> Report
                 </a>
             </li>
@@ -67,8 +67,8 @@
                     Plato
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a [routerLink]="['/activity']" class="dropdown-item" href="#">Plato</a>
-                    <a [routerLink]="['/activity']" class="dropdown-item" href="#">Workflow</a>
+                    <a [routerLink]="['/plato']" class="dropdown-item" href="#">Plato</a>
+                    <a [routerLink]="['/workflow']" class="dropdown-item" href="#">Workflow</a>
                 </div>
             </li>
         </ul>
@@ -91,8 +91,8 @@
             {{userProfile?.userRole.userRoleName}}<br />
 
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-sm btn-warning my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchString" name="first"> 
+                <button class="btn btn-sm btn-warning my-2 my-sm-0" type="button" (click)="search()">Search</button>
             </form>
         </div>
     </div>
