@@ -7,7 +7,7 @@
 
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-bottom:0px">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" style="padding-bottom:0px; margin-bottom:0px;margin-top:30px">
             <li class="nav-item active" [routerLinkActive]="['link-active']">
                 <a class="nav-link" [routerLink]="['/home']">
                     <i class="fa fa-home" aria-hidden="true"></i> Home
@@ -36,6 +36,17 @@
                     <a [routerLink]="['/procurement']" class="dropdown-item" href="#">Procurement</a>
                     <div class="dropdown-divider"></div>
                     <a [routerLink]="['/requestExpense']" class="dropdown-item" href="#">Request new Expense</a>
+                </div>
+            </li>
+
+            <li class="nav-item navbar-divider-vertical hidden-sm hidden-md hidden-xs"></li>
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    FTE
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a [routerLink]="['/fte', '']" class="dropdown-item" href="#">FTE</a>
+                    <div class="dropdown-divider"></div>
                     <a [routerLink]="['/requestFte']" class="dropdown-item" href="#">Request new FTE</a>
                 </div>
             </li>

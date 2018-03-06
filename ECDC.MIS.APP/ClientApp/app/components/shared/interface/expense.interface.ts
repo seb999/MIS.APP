@@ -1,4 +1,5 @@
 export interface Expense {
+    expenseId?:number;
     expenseName?: string;
     activityCode?: string;
     expenseTypeName?: string;

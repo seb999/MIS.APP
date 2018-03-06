@@ -1,0 +1,61 @@
+<h3>FTE</h3>
+
+<div *ngIf="showLoaded" class="overlay"></div>
+<div *ngIf="showLoaded" id="loaderModernize"></div>
+<p *ngIf="!expenseStaffList"><em>Loading...</em></p>
+
+<!--Button clear filters-->
+<div style="margin-bottom:10px;float:left;">
+    <button type="button" class="btn btn-labeled btn-info " (click)="clearFilters()">
+        <span class="btn-label"><i class="glyphicon glyphicon-repeat"></i></span> Clear filter
+    </button>
+</div>
+
+<!--Year filter-->
+<div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Year&nbsp;</div>
+<div class="dropdown" style="float:left;">
+    <select class="mySelect form-control input-sm" [(ngModel)]="selectedAwp" (ngModelChange)="loadLookupList()">
+        <option *ngFor="let awp of awpList" [ngValue]="awp"> {{awp.text}} </option>
+    </select>
+</div>
+
+<div style="margin-bottom:10px;float:left;margin-left:7px">
+    <input type="text" [(ngModel)]="filter.staffName" placeholder="Staff name..." class="form-control input-sm" />
+</div>
+
+<div style="clear:both"></div>
+
+<div class="row">
+    <div class="col-12">
+            <table class='table table-striped table-bordered table-sm' *ngIf="expenseStaffList">
+                    <thead>
+                        <tr >
+                            <th>Staff Id</th>
+                            <th>Staff name</th>
+                            <th>Expense name</th>
+                            <th>Activity name</th>
+                            <th>Plan day</th>
+                            <th>Plan FTE</th>
+                            <th>Actual day</th>
+                            <th>Actual FTE</th>
+                        </tr>
+                    </thead>
+                   
+                    <tbody>
+                        <tr *ngFor="let expenseStaff of expenseStaffList| expenseStaffFilter : filter" (click)="loadExpense(requestExpense.expenseId)">
+                            <td>{{ expenseStaff?.staffId }}</td>
+                            <td>{{ expenseStaff?.staffName }}</td>
+                            <td>{{expenseStaff?.expenseName}}</td>
+                            <td>{{expenseStaff?.activityName}}</td>
+                            <td>{{ expenseStaff?.planDay }}</td>
+                            <td>{{ expenseStaff?.planFte }}</td>
+                            <td>{{ expenseStaff?.actualDay }}</td>
+                            <td>{{ expenseStaff?.actualFte }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+    </div>
+
+</div>
+
+

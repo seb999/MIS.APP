@@ -1,0 +1,31 @@
+<h3>Expense detail</h3>
+
+<div *ngIf="showLoadedactivity" class="overlay"></div>
+<div *ngIf="showLoaded" id="loaderModernize"></div>
+<p *ngIf="!selectedExpense"><em>Loading...</em></p>
+
+<!-- <div style="margin-bottom:10px;float:left;">
+    <button type="button" class="btn btn-labeled btn-info" (click)="clearFilters()">
+        <span class="btn-label"><i class="fa fa-arrow-alt-circle-left"></i>
+    </button>
+</div> -->
+
+<div style="margin-bottom:10px;float:left;">
+    <button type="button" class="btn btn-outline-warning" (click)="previous()" [disabled]="disablePrevious">
+        <span><i class="far fa-arrow-alt-circle-left"></i></span>
+    </button>
+</div>
+
+<div style="margin-bottom:10px;float:left;">
+        <button type="button" class="btn btn-outline-warning" (click)="next()" [disabled]="disableNext">
+            <span><i class="far fa-arrow-alt-circle-right" ></i></span>
+        </button>
+    </div>
+
+
+<div style="clear:both"></div>
+    
+    
+
+
+{{selectedExpense?.expenseId}}

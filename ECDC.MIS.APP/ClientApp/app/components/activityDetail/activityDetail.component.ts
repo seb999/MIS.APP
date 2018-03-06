@@ -15,7 +15,10 @@ export class ActivityDetailComponent {
     public showLoaded: boolean;
     public webServiceUrl: string;
 
-    constructor(public http: Http, private router: Router, @Inject('WEB_SERVICE_URL') apiUrl: string, private route: ActivatedRoute) {
+    @ViewChild("tabs") tabs: any;
+
+    constructor(public http: Http, private router: Router, 
+        @Inject('WEB_SERVICE_URL') apiUrl: string, private route: ActivatedRoute){
         //Get web service URL from app.setting page
         this.webServiceUrl = apiUrl;
         this.showLoaded = true;
@@ -30,9 +33,13 @@ export class ActivityDetailComponent {
     }
 
     ngAfterViewInit() {
-
+        //if we are coming back from expenseDetail then we display Budget tab
+        if(localStorage.getItem("origine")=="budgetTab") {
+            this.tabs.select('tab-selectbyid2');
+            localStorage.setItem('origine', '');
+         }
     }
-
+    
     loadActivity(): any {
         let url = this.webServiceUrl + "/activity/GetActivity/" + this.activityId;
         this.http.get(url, { withCredentials: true }).subscribe(data => {
@@ -42,4 +49,8 @@ export class ActivityDetailComponent {
         }, err => null);
     }
 
+    redirect(activityId :number,expenseId : number){
+        localStorage.setItem('origine', 'budgetTab');
+        this.router.navigate(["expenseDetail", activityId, expenseId]);
+    }
 }

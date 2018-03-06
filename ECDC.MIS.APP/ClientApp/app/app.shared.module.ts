@@ -16,11 +16,14 @@ import { RequestExpenseComponent } from './components/requestExpense/requestExpe
 import { SearchComponent } from './components/search/search.component';
 import { RequestActivityComponent } from './components/requestActivity/requestActivity.component';
 import { RequestFteComponent } from './components/requestFte/requestFte.component';
+import { FteComponent } from './components/fte/fte.component';
 import { BudgetTransferComponent } from './components/budgetTransfer/budgetTransfer.component';
+import { ExpenseDetailComponent } from './components/expenseDetail/expenseDetail.component';
 
 //Pipe and Directive
 import { ActivityFilterPipe } from './components/shared/pipe/activity-filter.pipe';
 import { ExpenseFilterPipe } from './components/shared/pipe/expense-filter.pipe';
+import { ExpenseStaffFilterPipe } from './components/shared/pipe/expenseStaff-filter.pipe';
 import { SortableTableDirective } from './components/sortableTable/sortable-table.directive';
 import { SortableColumnComponent } from './components/sortableTable/sortable-column.component';
 
@@ -38,9 +41,12 @@ import { SortableColumnComponent } from './components/sortableTable/sortable-col
         RequestActivityComponent,
         RequestFteComponent,
         BudgetTransferComponent,
+        FteComponent,
+        ExpenseDetailComponent,
 
         ActivityFilterPipe,
         ExpenseFilterPipe,
+        ExpenseStaffFilterPipe,
         SortableTableDirective,
         SortableColumnComponent,
         
@@ -55,14 +61,16 @@ import { SortableColumnComponent } from './components/sortableTable/sortable-col
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'activity', component: ActivityComponent },
-            { path: ' /:activityId', component: ActivityDetailComponent },
+            { path: 'activityDetail/:activityId', component: ActivityDetailComponent },
             { path: 'meeting', component: MeetingComponent },
             { path: 'procurement', component: ProcurementComponent },
             { path: 'requestExpense', component: RequestExpenseComponent },
             { path: 'search/:searchString', component: SearchComponent },
             { path: 'requestActivity', component: RequestActivityComponent },
             { path: 'requestFte', component: RequestFteComponent },
+            { path: 'fte/:staffName', component: FteComponent },
             { path: 'budgetTransfer', component: BudgetTransferComponent },
+            { path: 'expenseDetail/:activityId/:expenseId', component: ExpenseDetailComponent },
             
             { path: '**', redirectTo: 'home' }
         ])
