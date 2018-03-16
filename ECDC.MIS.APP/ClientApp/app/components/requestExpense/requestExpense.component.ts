@@ -90,8 +90,8 @@ export class RequestExpenseComponent {
 
     clearFilters(){
         this.filter = {} as any;
-        this.filter.activityDpId = 0;
-        this.filter.activityUnitId = 0;
+        this.filter.dpId = 0;
+        this.filter.unitId = 0;
         this.filter.expenseTypeId = 0;
     }
 }

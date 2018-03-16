@@ -279,6 +279,11 @@
       "integrity": "sha1-k3hzJhLY6MceDXwvqg+t3H+Fjsk=",
       "dev": true
     },
+    "angular2-csv": {
+      "version": "0.2.5",
+      "resolved": "https://registry.npmjs.org/angular2-csv/-/angular2-csv-0.2.5.tgz",
+      "integrity": "sha1-gXn0OS7VxitAQ7+Bnjv8Huir+PM="
+    },
     "angular2-router-loader": {
       "version": "0.3.5",
       "resolved": "https://registry.npmjs.org/angular2-router-loader/-/angular2-router-loader-0.3.5.tgz",
@@ -4322,12 +4327,6 @@
         "minimist": "0.0.8"
       }
     },
-    "moment": {
-      "version": "2.18.1",
-      "resolved": "https://registry.npmjs.org/moment/-/moment-2.18.1.tgz",
-      "integrity": "sha1-w2GT3Tzhwu7SrbfIAtu8d6gbHA8=",
-      "dev": true
-    },
     "ms": {
       "version": "2.0.0",
       "resolved": "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz",
@@ -4375,115 +4374,6 @@
       "resolved": "https://registry.npmjs.org/negotiator/-/negotiator-0.6.1.tgz",
       "integrity": "sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk=",
       "dev": true
-    },
-    "ng2-datepicker-bootstrap": {
-      "version": "1.0.0",
-      "resolved": "https://registry.npmjs.org/ng2-datepicker-bootstrap/-/ng2-datepicker-bootstrap-1.0.0.tgz",
-      "integrity": "sha1-eKPQ3TuOu7+tH9oZVAiRY8RvPyc=",
-      "dev": true,
-      "requires": {
-        "@angular/common": "4.0.0",
-        "@angular/compiler": "4.0.0",
-        "@angular/core": "4.0.0",
-        "@angular/forms": "4.0.0",
-        "@angular/http": "4.0.0",
-        "@angular/platform-browser": "4.0.0",
-        "@angular/platform-browser-dynamic": "4.0.0",
-        "@angular/router": "4.0.0",
-        "bootstrap": "3.3.7",
-        "core-js": "2.4.1",
-        "font-awesome": "4.7.0",
-        "jquery": "3.2.0",
-        "moment": "2.18.1",
-        "oidc-token-manager": "1.2.0",
-        "q": "1.4.1",
-        "rxjs": "5.1.0",
-        "ts-helpers": "1.1.1",
-        "zone.js": "0.8.4"
-      },
-      "dependencies": {
-        "@angular/common": {
-          "version": "4.0.0",
-          "resolved": "https://registry.npmjs.org/@angular/common/-/common-4.0.0.tgz",
-          "integrity": "sha1-yhiYMiL9q07Kp6i5ntpv9mHm3JI=",
-          "dev": true
-        },
-        "@angular/compiler": {
-          "version": "4.0.0",
-          "resolved": "https://registry.npmjs.org/@angular/compiler/-/compiler-4.0.0.tgz",
-          "integrity": "sha1-4aoGGm+O8mn5dIrxp7wpD5037Ww=",
-          "dev": true
-        },
-        "@angular/core": {
-          "version": "4.0.0",
-          "resolved": "https://registry.npmjs.org/@angular/core/-/core-4.0.0.tgz",
-          "integrity": "sha1-/Yd+B0sp36nGO5aiGZX8dVbUI6M=",
-          "dev": true
-        },
-        "@angular/forms": {
-          "version": "4.0.0",
-          "resolved": "https://registry.npmjs.org/@angular/forms/-/forms-4.0.0.tgz",
-          "integrity": "sha1-AxYwR6LoSvQhBicNouH0erD6/Dc=",
-          "dev": true
-        },
-        "@angular/http": {
-          "version": "4.0.0",
-          "resolved": "https://registry.npmjs.org/@angular/http/-/http-4.0.0.tgz",
-          "integrity": "sha1-RaU46sQqCxPzdEx+i6/rF9WNoxw=",
-          "dev": true
-        },
-        "@angular/platform-browser": {
-          "version": "4.0.0",
-          "resolved": "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-4.0.0.tgz",
-          "integrity": "sha1-USrpqxnMwl+nkCf0TikbzuI2zSs=",
-          "dev": true
-        },
-        "@angular/platform-browser-dynamic": {
-          "version": "4.0.0",
-          "resolved": "https://registry.npmjs.org/@angular/platform-browser-dynamic/-/platform-browser-dynamic-4.0.0.tgz",
-          "integrity": "sha1-0dnegP4eAnNb6J9RLg+vWoDVf6U=",
-          "dev": true
-        },
-        "@angular/router": {
-          "version": "4.0.0",
-          "resolved": "https://registry.npmjs.org/@angular/router/-/router-4.0.0.tgz",
-          "integrity": "sha1-9KLcg7ROAj2x1vLBLKWjeiLGavw=",
-          "dev": true
-        },
-        "bootstrap": {
-          "version": "3.3.7",
-          "resolved": "https://registry.npmjs.org/bootstrap/-/bootstrap-3.3.7.tgz",
-          "integrity": "sha1-WjiTlFSfIzMIdaOxUGVldPip63E=",
-          "dev": true
-        },
-        "jquery": {
-          "version": "3.2.0",
-          "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.2.0.tgz",
-          "integrity": "sha1-O9u6ZuHu4HhVMt3a2w4NJSHKWEs=",
-          "dev": true
-        },
-        "q": {
-          "version": "1.4.1",
-          "resolved": "https://registry.npmjs.org/q/-/q-1.4.1.tgz",
-          "integrity": "sha1-VXBbzZPF82c1MMLCy8DCs63cKG4=",
-          "dev": true
-        },
-        "rxjs": {
-          "version": "5.1.0",
-          "resolved": "https://registry.npmjs.org/rxjs/-/rxjs-5.1.0.tgz",
-          "integrity": "sha1-CqkBi39EC1BfpCvXQrZzi+VQ5yA=",
-          "dev": true,
-          "requires": {
-            "symbol-observable": "1.0.4"
-          }
-        },
-        "zone.js": {
-          "version": "0.8.4",
-          "resolved": "https://registry.npmjs.org/zone.js/-/zone.js-0.8.4.tgz",
-          "integrity": "sha1-zECuWhyHlgHF67oglrXIDwxMNgI=",
-          "dev": true
-        }
-      }
     },
     "no-case": {
       "version": "2.3.1",
@@ -4704,12 +4594,6 @@
           }
         }
       }
-    },
-    "oidc-token-manager": {
-      "version": "1.2.0",
-      "resolved": "https://registry.npmjs.org/oidc-token-manager/-/oidc-token-manager-1.2.0.tgz",
-      "integrity": "sha1-QuwRMIIjKatzxN87a/zY12AAp00=",
-      "dev": true
     },
     "on-finished": {
       "version": "2.3.0",
@@ -6577,12 +6461,6 @@
       "requires": {
         "loader-utils": "0.2.17"
       }
-    },
-    "ts-helpers": {
-      "version": "1.1.1",
-      "resolved": "https://registry.npmjs.org/ts-helpers/-/ts-helpers-1.1.1.tgz",
-      "integrity": "sha1-iVU9K40xPn8OPgyFwI1tPwNAH1c=",
-      "dev": true
     },
     "tsickle": {
       "version": "0.21.6",

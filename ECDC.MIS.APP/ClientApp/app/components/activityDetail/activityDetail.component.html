@@ -5,280 +5,239 @@
 <p *ngIf="!activity"><em>Loading...</em></p>
 
 <ngb-tabset #tabs="ngbTabset">
-        <ngb-tab id="tab-selectbyid1" title="Simple">
-          <ng-template ngbTabContent>
-            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-            master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh
-            dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum
-            iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-          </ng-template>
-        </ngb-tab>
-        <ngb-tab id="tab-selectbyid2">
-          <ng-template ngbTabTitle><b>Fancy</b> title</ng-template>
-          <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-            <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
-            craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
-            cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia
-            yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
-            shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero
-            sint qui sapiente accusamus tattooed echo park.</p>
-          </ng-template>
-        </ngb-tab>
-      </ngb-tabset>
-      
-      <p>
-        <button class="btn btn-outline-primary" (click)="tabs.select('tab-selectbyid2')">Selected tab with "tab-selectbyid2" id</button>
-      </p>
 
-<ul class="nav nav-tabs" id="myTab" role="tablist" #tab>
-    <li class="nav-item">
-      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#summary" role="tab" aria-controls="home" aria-selected="true">Summary</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#budget" role="tab" aria-controls="budget" aria-selected="false">Budget</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Monitoring</a>
-    </li>
-  </ul>
-
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="summary" role="tabpanel" aria-labelledby="home-tab">
+    <ngb-tab id="summary" title="Summary">
+        <ng-template ngbTabContent>
             <div class="row">
-
-                    <div class="col-6">
-                
-                        <div class="card">
-                            <div class="card-header bg-info text-white">
-                                {{activity?.activityCode}}
-                            </div>
-                
-                            <div class="card-block">
-                                <div class="row" style="padding:0px !important;margin:0px !important">
-                                    <div class="col-6" style="padding:0px !important;margin:0px !important">
-                                        <ul class="list-group" style="padding:0px !important;margin:0px !important">
-                                            <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                                <p class="label">Created</p>
-                                                <p class="labelC">{{activity?.dateAdded | date : 'dd/MM/yyyy'}}</p>
-                                            </li>
-                                            <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                                <p class="label">Activity Id</p>
-                                                <p class="labelC">{{activity?.activityId}}</p>
-                                            </li>
-                                            <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                                <p class="label">Status</p>
-                                                <p class="labelC">{{activity?.statusName}}</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-6" style="padding:0px !important;margin:0px !important">
-                                        <ul class="list-group" style="padding:0px">
-                                            <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                                <p class="label">AWP</p>
-                                                <p class="labelC">{{activity?.awpName}}</p>
-                                            </li>
-                                            <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                                <p class="label">Start date</p>
-                                                <p class="labelC">{{activity?.startDate | date : 'dd/MM/yyyy'}}</p>
-                                            </li>
-                                            <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                                <p class="label">End date</p>
-                                                <p class="labelC">{{activity?.endDate | date : 'dd/MM/yyyy'}}</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                
-                            </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            Activity {{activity?.activityCode}}
                         </div>
-                        <br/>
-                
-                        <div class="card ">
-                            <div class="card-header bg-info text-white">
-                                Summary
+
+                        <div class="card-block">
+                            <div class="row" style="padding:0px !important;margin:0px !important">
+                                <div class="col-6" style="padding:0px !important;margin:0px !important">
+                                    <ul class="list-group" style="padding:0px !important;margin:0px !important">
+                                        <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                            <p class="label">Created</p>
+                                            <p class="labelC">{{activity?.dateAdded | date : 'dd/MM/yyyy'}}</p>
+                                        </li>
+                                        <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                            <p class="label">Activity Id</p>
+                                            <p class="labelC">{{activity?.activityId}}</p>
+                                        </li>
+                                        <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                            <p class="label">Status</p>
+                                            <p class="labelC">{{activity?.statusName}}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-6" style="padding:0px !important;margin:0px !important">
+                                    <ul class="list-group" style="padding:0px">
+                                        <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                            <p class="label">AWP</p>
+                                            <p class="labelC">{{activity?.awpName}}</p>
+                                        </li>
+                                        <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                            <p class="label">Start date</p>
+                                            <p class="labelC">{{activity?.startDate | date : 'dd/MM/yyyy'}}</p>
+                                        </li>
+                                        <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                            <p class="label">End date</p>
+                                            <p class="labelC">{{activity?.endDate | date : 'dd/MM/yyyy'}}</p>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="card-block">
-                
-                                <ul class="list-group" style="padding:0px">
-                                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                        <p class="label">Activity name</p>
-                                        <p class="labelC">{{activity?.activityName}}</p>
-                                    </li>
-                                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                        <div style="float:left">
-                                            <p class="label">Activity leader</p>
-                                            <p class="labelC">{{activity?.activityLeader}}</p>
-                                        </div>
-                                        <div style="float:right">
-                                            <div class="mx-auto"><img src="data:image/JPEG;base64,{{activity?.activityLeaderPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" /></div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                        <p class="label">Description</p>
-                                        <p class="labelC">{{activity?.activityDescription}}</p>
-                                    </li>
-                                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                        <p class="label">Strategy</p>
-                                        <p class="labelC">{{activity?.strategyCode}}</p>
-                                    </li>
-                                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                        <p class="label">Unit</p>
-                                        <p class="labelC">{{activity?.unitCode}}</p>
-                                    </li>
-                                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                        <p class="label">DP</p>
-                                        <p class="labelC">{{activity?.dpCode}}</p>
-                                    </li>
-                                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                        <p class="label">Section</p>
-                                        <p class="labelC">{{activity?.sectionCode}}</p>
-                                    </li>
-                                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                        <p class="label">Capacity level</p>
-                                        <p class="labelC">{{activity?.CapacityLevel}}</p>
-                                    </li>
-                                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                        <p class="label">Project</p>
-                                        <p class="labelC">{{activity?.project}}</p>
-                                    </li>
-                                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
-                                        <p class="label">Functional group</p>
-                                        <p class="labelC">{{activity?.functionalGroup}}</p>
-                                    </li>
-                                </ul>
-                            </div>
+
                         </div>
                     </div>
-                
-                    <div class="col-6">
-                        <div class="card ">
-                            <div class="card-header bg-info text-white">
-                                Ressources
-                            </div>
-                            <div class="card-block">
-                
-                
-                                <ul class="list-group" style="padding:0px">
-                                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px" *ngFor="let expense of activity?.expenseList">
-                
-                                        <h6 class="m-2">{{expense?.expenseId}} - {{expense?.expenseName}}</h6>
-                
-                                        <div class="card-deck m-1">
-                
-                                            <div class="card bg-light" *ngFor="let expenseStaff of expense?.expenseStaffList" style="max-width:250px;min-width:250px;margin-bottom:7px">
-                                                <div class="card-header" style="padding:5px;background-color:rgb(182, 205, 221);">
-                                                        <img src="data:image/JPEG;base64,{{expenseStaff?.staffPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" />
-                                                           
-                                                        <a [routerLink]="['/fte', expenseStaff?.staffName]" class="dropdown-item" href="#">
-                                                            {{expenseStaff?.staffName}}
-                                                        </a>
-                                                    
-                                                </div>
-                
-                                                <div class="card-body" style="padding:5px;">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="label">Planned days</p>
-                                                            <p class="labelC">{{expenseStaff?.planDay}}</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="label">Planned FTEs</p>
-                                                            <p class="labelC">{{expenseStaff?.planFte}}</p>
-                                                        </div>
+                    <br />
+
+                    <div class="card ">
+                        <div class="card-header bg-info text-white">
+                            Summary
+                        </div>
+                        <div class="card-block">
+
+                            <ul class="list-group" style="padding:0px">
+                                <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                    <p class="label">Activity name</p>
+                                    <p class="labelC">{{activity?.activityName}}</p>
+                                </li>
+                                <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                    <div style="float:left">
+                                        <p class="label">Activity leader</p>
+                                        <p class="labelC">{{activity?.activityLeader}}</p>
+                                    </div>
+                                    <div style="float:right">
+                                        <div class="mx-auto"><img src="data:image/JPEG;base64,{{activity?.activityLeaderPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" /></div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                    <p class="label">Description</p>
+                                    <p class="labelC">{{activity?.activityDescription}}</p>
+                                </li>
+                                <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                    <p class="label">Strategy</p>
+                                    <p class="labelC">{{activity?.strategyCode}}</p>
+                                </li>
+                                <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                    <p class="label">Unit</p>
+                                    <p class="labelC">{{activity?.unitCode}}</p>
+                                </li>
+                                <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                    <p class="label">DP</p>
+                                    <p class="labelC">{{activity?.dpCode}}</p>
+                                </li>
+                                <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                    <p class="label">Section</p>
+                                    <p class="labelC">{{activity?.sectionCode}}</p>
+                                </li>
+                                <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                    <p class="label">Capacity level</p>
+                                    <p class="labelC">{{activity?.CapacityLevel}}</p>
+                                </li>
+                                <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                    <p class="label">Project</p>
+                                    <p class="labelC">{{activity?.project}}</p>
+                                </li>
+                                <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                                    <p class="label">Functional group</p>
+                                    <p class="labelC">{{activity?.functionalGroup}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="card ">
+                        <div class="card-header bg-info text-white">
+                            Ressources
+                        </div>
+                        <div class="card-block">
+
+
+                            <ul class="list-group" style="padding:0px">
+                                <li class="list-group-item" style="padding-top:5px;padding-bottom:5px" *ngFor="let expense of activity?.expenseList">
+
+                                    <h6 class="m-2">{{expense?.expenseId}} - {{expense?.expenseName}}</h6>
+
+                                    <div class="card-deck m-1">
+
+                                        <div class="card bg-light" *ngFor="let expenseStaff of expense?.expenseStaffList" style="max-width:250px;min-width:250px;margin-bottom:7px">
+                                            <div class="card-header" style="padding:5px;background-color:rgb(182, 205, 221);">
+                                                <img src="data:image/JPEG;base64,{{expenseStaff?.staffPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" />
+
+                                                <a [routerLink]="['/fte', expenseStaff?.staffName]" class="dropdown-item" href="#">
+                                                    {{expenseStaff?.staffName}}
+                                                </a>
+
+                                            </div>
+
+                                            <div class="card-body" style="padding:5px;">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <p class="label">Planned days</p>
+                                                        <p class="labelC">{{expenseStaff?.planDay}}</p>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <p class="label">Days actual</p>
-                                                            <p class="labelC" *ngIf="displayFte || currentUser?.userId == expenseStaff?.staffId">{{expenseStaff?.actualDay}}</p>
-                                                            <p class="labelC" *ngIf="displayFte || currentUser?.userId == expenseStaff?.staffId">{{expenseStaff?.actualFte}}</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                                <p class="label">FTEs actual</p>
-                                                                <p class="labelC" *ngIf="!displayFte && currentUser?.userId != expenseStaff?.staffId"><i style="color:red" class="glyphicon glyphicon-ban-circle"></i></p>
-                                                                <p class="labelC" *ngIf="!displayFte && currentUser?.UserId != expenseStaff?.staffId"><i style="color:red" class="glyphicon glyphicon-ban-circle"></i></p>
-                                                        </div>
+                                                    <div class="col-6">
+                                                        <p class="label">Planned FTEs</p>
+                                                        <p class="labelC">{{expenseStaff?.planFte}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <p class="label">Days actual</p>
+                                                        <p class="labelC" *ngIf="displayFte || currentUser?.userId == expenseStaff?.staffId">{{expenseStaff?.actualDay}}</p>
+                                                        <p class="labelC" *ngIf="displayFte || currentUser?.userId == expenseStaff?.staffId">{{expenseStaff?.actualFte}}</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p class="label">FTEs actual</p>
+                                                        <p class="labelC" *ngIf="!displayFte && currentUser?.userId != expenseStaff?.staffId"><i style="color:red" class="glyphicon glyphicon-ban-circle"></i></p>
+                                                        <p class="labelC" *ngIf="!displayFte && currentUser?.UserId != expenseStaff?.staffId"><i style="color:red" class="glyphicon glyphicon-ban-circle"></i></p>
                                                     </div>
                                                 </div>
                                             </div>
-                
                                         </div>
-                                    </li>
-                                    </ul>
-                
-                
-                            </div>
+
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                
                 </div>
-    
-    </div>
 
-    <div class="tab-pane fade" id="budget" role="tabpanel" aria-labelledby="budget-tab">
+            </div>
 
-        <div class="card">
-            <div class="card-header bg-info text-white">Expenses</div>
+        </ng-template>
+    </ngb-tab>
+
+    <ngb-tab id="budget" title="Budget">
+        <ng-template ngbTabContent>
+            <div class="card">
+                <div class="card-header bg-info text-white">Expenses</div>
                 <div class="card-block">
-                    <table class="table table-striped table-bordered table-hover table-sm" sortable-table (sorted)="onSorted($event)" >
-                    <thead>
-                        <tr>
-                            <th >
-                                Id
-                            </th>
-                            <th >
-                                Name
-                            </th>
-                            <th >
-                                Expense type
-                            </th>
-                            <th >
-                                Budget line
-                            </th>
-                            <th >
-                                Amount
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let expense of activity?.expenseList"  style="cursor:pointer" (click)=redirect(activity.activityId,expense.expenseId); >
+                    <table class="table table-striped table-bordered table-hover table-sm" sortable-table (sorted)="onSorted($event)">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Expense type
+                                </th>
+                                <th>
+                                    Budget line
+                                </th>
+                                <th>
+                                    Amount
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let expense of activity?.expenseList" style="cursor:pointer" (click)=redirect(activity.activityId,expense.expenseId);>
                                 <!-- [routerLink]="['/expenseDetail', activity.activityId, expense.expenseId]" -->
-                            <td>
-                                {{expense.expenseId}}
-                            </td>
-                            <td>
-                                {{expense.expenseName}}
-                            </td>
-                            <td>
-                                {{expense.expenseTypeName}}
-                            </td>
-                            <td>
-                                {{expense.budgetLineName}}
-                            </td>
-                            <td>
-                                {{expense.amount}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="card">
-                <div class="card-header bg-info text-white">Budget transfer summary</div>
-                    <div class="card-block">
-                        
+                                <td>
+                                    {{expense.expenseId}}
+                                </td>
+                                <td>
+                                    {{expense.expenseName}}
+                                </td>
+                                <td>
+                                    {{expense.expenseTypeName}}
+                                </td>
+                                <td>
+                                    {{expense.budgetLineName}}
+                                </td>
+                                <td>
+                                    {{expense.amount}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-   
-  </div>
 
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+            <div class="card">
+                <div class="card-header bg-info text-white">Budget transfer summary</div>
+                <div class="card-block">
 
-  <script lang="javaScript">
+                </div>
+            </div>
 
-      $(document).ready(function(){
-          alert("fini");
-        $('#myTab a[href="#budget"]').tab('show');
-});
-  
-  </script>
+        </ng-template>
+    </ngb-tab>
+
+    <ngb-tab id="monitoring" title="Monitoring">
+        <ng-template ngbTabContent>
+            Monitore here
+
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

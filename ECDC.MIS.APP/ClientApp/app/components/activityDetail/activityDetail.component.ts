@@ -35,7 +35,7 @@ export class ActivityDetailComponent {
     ngAfterViewInit() {
         //if we are coming back from expenseDetail then we display Budget tab
         if(localStorage.getItem("origine")=="budgetTab") {
-            this.tabs.select('tab-selectbyid2');
+            this.tabs.select('budget');
             localStorage.setItem('origine', '');
          }
     }

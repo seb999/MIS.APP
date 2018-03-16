@@ -1,5 +1,5 @@
 ﻿//Seb : put only properties you want to filter
-export class Meeting {
+export interface Meeting {
     
     unitId: number;
     dpId: number;

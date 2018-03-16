@@ -65,5 +65,8 @@
     "webpack-merge": "4.1.0",
     "zone.js": "0.8.12",
     "@ng-bootstrap/ng-bootstrap": "1.0.0"
+  },
+  "dependencies": {
+    "angular2-csv": "^0.2.5"
   }
 }

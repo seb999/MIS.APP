@@ -9,23 +9,131 @@
         <span class="btn-label"><i class="fa fa-arrow-alt-circle-left"></i>
     </button>
 </div> -->
-
+<!--Buttons-->
 <div style="margin-bottom:10px;float:left;">
-    <button type="button" class="btn btn-outline-warning" (click)="previous()" [disabled]="disablePrevious">
-        <span><i class="far fa-arrow-alt-circle-left"></i></span>
+    <button type="button" class="btn btn-labeled btn-success" (click)="clearFilters()" data-toggle="modal" data-target="#editExpenseModal">
+        <span class="btn-label"><i class="glyphicon glyphicon-repeat"></i></span> Edit
+    </button>
+
+    <button type="button" class="btn btn-labeled btn-warning" (click)="previous()" [disabled]="disablePrevious">
+        <<
+    </button>
+
+    <button type="button" class="btn btn-warning" (click)="next()" [disabled]="disableNext">
+        >>
     </button>
 </div>
 
-<div style="margin-bottom:10px;float:left;">
-        <button type="button" class="btn btn-outline-warning" (click)="next()" [disabled]="disableNext">
-            <span><i class="far fa-arrow-alt-circle-right" ></i></span>
-        </button>
-    </div>
-
 
 <div style="clear:both"></div>
-    
-    
 
+<div class="row">
+    <div class="col-6">
+        <div class="card ">
+            <div class="card-header bg-info text-white">
+                Summary
+            </div>
+            <div class="card-block">
 
-{{selectedExpense?.expenseId}}
+                <ul class="list-group" style="padding:0px">
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Expense Id</p>
+                        <p class="labelC">{{selectedExpense?.expenseId}}</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Expense Type</p>
+                        <p class="labelC">{{selectedExpense?.expenseTypeName}}</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Expense Name</p>
+                        <p class="labelC">{{selectedExpense?.expenseName}}</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Budget line</p>
+                        <p class="labelC">{{selectedExpense?.budgetLineName}}</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <div style="float:left">
+                            <p class="label">Organiser</p>
+                            <p class="labelC">{{selectedExpense?.organiser}}</p>
+                        </div>
+                        <div style="float:right">
+                            <div class="mx-auto"><img src="data:image/JPEG;base64,{{selectedExpense?.organiserPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" /></div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <div class="row">
+                            <div class="col-3">
+                                <p class="label">Start date</p>
+                                <p class="labelC">{{selectedExpense?.startDate| date: 'dd/MM/yyyy'}}</p>
+                            </div>
+                            <div class="col-5">
+                                <p class="label">End date</p>
+                                <p class="labelC">{{selectedExpense?.endDate| date: 'dd/MM/yyyy'}}</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <div class="row">
+                            <div class="col-3">
+                                <p class="label">Initial amount</p>
+                                <p class="labelC">{{selectedExpense?.initialAmount}}</p>
+                            </div>
+                            <div class="col-5">
+                                <p class="label">Amount</p>
+                                <p class="labelC">{{userProfile?.amount}}</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <div class="row">
+                            <div class="col-3">
+                                <p class="label">Committed</p>
+                                <p class="labelC">{{selectedExpense?.amountCommitted}}</p>
+                            </div>
+                            <div class="col-5">
+                                <p class="label">Paid</p>
+                                <p class="labelC">{{userProfile?.amountPaid}}</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Authorising officer</p>
+                        <p class="labelC">{{selectedExpense?.AuthorisingOfficer}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="card ">
+            <div class="card-header bg-info text-white">
+                Deliverables
+            </div>
+            <div class="card-block">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="card ">
+            <div class="card-header bg-info text-white">
+                Procurement
+            </div>
+            <div class="card-block">
+
+            </div>
+        </div>
+        <br>
+        <div class="card ">
+            <div class="card-header bg-info text-white">
+                Meeting
+            </div>
+            <div class="card-block">
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+   

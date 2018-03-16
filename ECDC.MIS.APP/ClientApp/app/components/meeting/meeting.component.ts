@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { LookupListItem } from '../shared/lookupListItem';
 import { ColumnSortedEvent } from '../sortableTable/sort.service';
-import { Meeting } from './meeting';
+import { Meeting } from '../shared/interface/meeting.interface';
 
 @Component({
     selector: 'meeting',
@@ -24,7 +24,7 @@ export class MeetingComponent {
 
     public showLoaded: boolean;
     public webServiceUrl: string;
-    public filter: Meeting = new Meeting();
+    public filter: Meeting = {} as any;
 
     constructor(public http: Http, private router: Router, @Inject('WEB_SERVICE_URL') apiUrl: string) {
         this.webServiceUrl = apiUrl;
@@ -79,7 +79,7 @@ export class MeetingComponent {
     }
 
     clearFilters() {
-        this.filter = new Meeting();
+        this.filter = {} as any;
         this.filter.dpId = 0;
         this.filter.unitId = 0;
         this.filter.sectionId = 0;

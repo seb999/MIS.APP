@@ -6,8 +6,8 @@ export interface Expense {
     expenseTypeId?: number;
     startDate?: Date;
     endDate?: Date;
-    unitId?:number;
-    dpId?:number;
+    activityUnitId?:number;
+    activityDpId?:number;
 
     [key: number]: string;
 }

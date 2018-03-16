@@ -5,17 +5,16 @@ import { LookupListItem } from '../shared/lookupListItem';
 import { ActivityFilterPipe } from '../shared/pipe/activity-filter.pipe';
 import { ColumnSortedEvent } from '../sortableTable/sort.service';
 import { Activity } from '../shared/interface/activity.interface';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 
 @Component({
     selector: 'activity',
     templateUrl: './activity.component.html'
 })
 
-
-
 export class ActivityComponent {
 
-    public activityList: Activity[] = [] as any;
+    public activityList: Activity[];
     public awpList: LookupListItem[]= [] as any;
     public strategyList: LookupListItem[]= [] as any;
     public unitList: LookupListItem[]= [] as any;
@@ -25,8 +24,6 @@ export class ActivityComponent {
     public statusList: LookupListItem[]= [] as any;
 
     public selectedAwp: any;
-    public filter: Activity = {} as any;
-
     public selectedStrategy: any;
     public selectedUnit: any;
     public selectedDp: any;
@@ -34,27 +31,22 @@ export class ActivityComponent {
     public selectedLeader: any;
     public selectedStatus: any;
 
-    private p: any;
-
     public showLoaded: boolean;
     public webServiceUrl: string;
+    public filter: Activity = {} as any;
+    public progress: string = "0";
 
     constructor(public http: Http, private router: Router, @Inject('WEB_SERVICE_URL') apiUrl: string) {
         //Get web service URL from app.setting page
         this.webServiceUrl = apiUrl;
         this.showLoaded = true;
-
-      
     }
 
     ngOnInit() {
         this.loadLookupList();
-        
     }
 
-    ngAfterViewInit() {
-        
-    }
+    ngAfterViewInit() { };
 
     loadLookupList() {
         let url = this.webServiceUrl + "/lookuplist";
@@ -96,7 +88,6 @@ export class ActivityComponent {
         this.http.get(url, { withCredentials: true }).subscribe(data => {
             this.activityList = data.json();
             this.showLoaded = false;
-            console.log(this.activityList);
         }, err => null);
     }
 
@@ -127,5 +118,15 @@ export class ActivityComponent {
 
     navigateActivityDetail() {
         this.router.navigate(["home", ""]);
-        };
+    };
+
+    exportToCsv() {
+        this.progress = "1";
+        let url = this.webServiceUrl + "/activity/exportData/" + this.selectedAwp.value;
+        this.http.get(url, { withCredentials: true }).subscribe(data => {
+            new Angular2Csv(data.json(), 'MISActivity', { headers: Object.keys(data.json()[0]) });
+            this.progress = "100";
+            setTimeout(() => { this.progress = "0" }, 2000)
+        }, err => null);
+    }
 }

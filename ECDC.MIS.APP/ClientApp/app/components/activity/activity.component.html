@@ -2,15 +2,17 @@
 
 <div *ngIf="showLoaded" class="overlay"></div>
 <div *ngIf="showLoaded" id="loaderModernize"></div>
-
-<!--<ngb-alert [dismissible]="false">
-    <strong>Warning!</strong> Better check yourself, you're not looking too good.
-</ngb-alert>-->
+<p *ngIf="!activityList"><em>Loading...</em></p>
 
 <!--Button clear filters-->
 <div style="margin-bottom:10px;float:left;">
     <button type="button" class="btn btn-labeled btn-info " (click)="clearFilters()">
-        <span class="btn-label"><i class="glyphicon glyphicon-repeat"></i></span> Clear filter
+        <span class="btn-label"><i class="fas fa-sync-alt"></i></span> Clear filter
+    </button>
+
+    <button type="button" class="btn btn-labeled btn-info " (click)="exportToCsv()">
+        <span class="btn-label"><i class="fas fa-file-excel"></i> Export to Excel</span> 
+        <ngb-progressbar type="warning" [value]="progress" [hidden]="progress<1" height=".2rem" [striped]="true"></ngb-progressbar>
     </button>
 </div>
 
@@ -22,47 +24,47 @@
     </select>
 </div>
 
-<table class="table table-striped table-bordered table-hover table-condensed floating-header" sortable-table (sorted)="onSorted($event)" >
+<table class="table table-striped table-bordered table-hover table-condensed table-sm" sortable-table (sorted)="onSorted($event)">
     <thead>
         <tr class="bg-warning">
             <th sortable-column="activityId">
                 Id
             </th>
-            <th  sortable-column="activityCode">
+            <th sortable-column="activityCode">
                 Code
-             
+
             </th>
-            <th >
+            <th>
                 Name
-               
+
             </th>
-            <th >
+            <th>
                 Strategy
-               
+
             </th>
-            <th >
+            <th>
                 Unit
-               
+
             </th>
-            <th >
+            <th>
                 DP
-               
+
             </th>
             <th>
                 Section
-              
+
             </th>
             <th>
                 Activity Leader
-              
+
             </th>
             <th>
                 Budget
-               
+
             </th>
             <th>
                 Status
-                
+
             </th>
         </tr>
     </thead>
@@ -104,7 +106,7 @@
                 </select>
             </td>
             <td></td>
-            <td >
+            <td>
                 <select class="form-control input-sm" [(ngModel)]="filter.statusId">
                     <option *ngFor="let item of statusList" [ngValue]="item.value">{{item.text}}</option>
                 </select>
@@ -114,7 +116,7 @@
 
     <tbody>
 
-        <tr *ngFor="let activity of activityList | activityFilter : filter"  style="cursor:pointer" [routerLink]="['/activityDetail', activity.activityId]">
+        <tr *ngFor="let activity of activityList | activityFilter : filter" style="cursor:pointer" [routerLink]="['/activityDetail', activity.activityId]">
             <td style="min-width:80px">
                 {{activity.activityId}}
             </td>
