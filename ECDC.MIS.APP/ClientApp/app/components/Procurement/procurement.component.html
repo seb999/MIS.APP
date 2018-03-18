@@ -9,11 +9,11 @@
 
 <!--Button clear filters-->
 <div style="margin-bottom:10px;float:left;">
-    <button type="button" class="btn btn-labeled btn-info " (click)="clearFilters()">
+    <button type="button" class="btn btn-labeled btn-info btn-sm " (click)="clearFilters()">
         <span class="btn-label"><i class="fas fa-sync-alt"></i></span> Clear filter
     </button>
 
-    <button type="button" class="btn btn-labeled btn-info " (click)="exportToCsv()">
+    <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="exportToCsv()">
         <span class="btn-label"><i class="fas fa-file-excel"></i> Export to Excel</span>
         <ngb-progressbar type="warning" [value]="progress" [hidden]="progress<1" height=".2rem" [striped]="true"></ngb-progressbar>
     </button>
@@ -22,7 +22,7 @@
 <!--Year filter-->
 <div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Year&nbsp;</div>
 <div class="dropdown" style="float:left;">
-    <select class="mySelect form-control input-sm " [(ngModel)]="selectedAwp" (ngModelChange)="loadLookupList()">
+    <select class="mySelect form-control form-control-sm " [(ngModel)]="selectedAwp" (ngModelChange)="loadLookupList()">
         <option *ngFor="let awp of awpList" [ngValue]="awp"> {{awp.text}} </option>
     </select>
 </div>
@@ -30,10 +30,27 @@
 <!--Unit filter-->
 <div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Unit&nbsp;</div>
 <div class="dropdown" style="float:left;">
-    <select class="form-control input-sm" [(ngModel)]="filter.unitId" required>
-        <option *ngFor="let item of unitList" [ngValue]="item.value">{{item.text}}</option>
+    <select class="form-control form-control-sm" [(ngModel)]="selectedUnit" (change)="unitChanged()" required>
+        <option *ngFor="let item of unitList" [ngValue]="item" >{{item.text}}</option>
     </select>
 </div>
+
+<!--DP filter-->
+<div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">DP&nbsp;</div>
+<div class="dropdown" style="float:left;">
+    <select class="form-control form-control-sm" [(ngModel)]="filter.dpId" required>
+        <option *ngFor="let item of dpList" [ngValue]="item.value">{{item.text}}</option>
+    </select>
+</div>
+
+<!--Section filter-->
+<div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Section&nbsp;</div>
+<div class="dropdown" style="float:left;">
+    <select class="form-control form-control-sm" [(ngModel)]="filter.sectionId" required>
+        <option *ngFor="let item of sectionList" [ngValue]="item.value">{{item.text}}</option>
+    </select>
+</div>
+
 
 <table class="table table-striped table-bordered table-hover table-condensed table-sm">
     <thead id="tableHeader">
@@ -79,40 +96,47 @@
         </tr>
     </thead>
 
-    <!--<tbody class="avoid-sort">
+    <tbody class="avoid-sort">
         <tr class="trFilter">
             <td></td>
-            <td style="min-width:60px">
-                <input type="text" class="form-control input-sm " ng-change="filterTable()" ng-model="selectedExpenseId" />
+            <td>
+                <input type="text" [(ngModel)]="filter.expenseIdName" placeholder="Expense Id..." class="form-control form-control-sm" />
             </td>
             <td>
-                <select class="mySelect form-control input-sm " ng-model="selectedBudgetLine" ng-options="p.Text for p in budgetLineList| filter: {ExtraData :selectedAwp.ExtraData}" ng-change="filterTable()"></select>
-            </td>
-            <td></td>
-            <td></td>
-            <td>
-                <select class="mySelect form-control input-sm " ng-model="selectedProjectManager" ng-options="p.Text for p in projectManagerList" ng-change="filterTable()"></select>
-            </td>
-            <td>
-                <select class="mySelect form-control input-sm " ng-model="selectedAuthOfficer" ng-options="p.Text for p in authOfficerList" ng-change="filterTable()"></select>
-            </td>
-            <td>
-                <select class="mySelect form-control input-sm " ng-model="selectedProcOfficer" ng-options="p.Text for p in procOfficerList" ng-change="filterTable()"></select>
-            </td>
-            <td></td>
-            <td>
-                <select class="mySelect form-control input-sm " ng-model="selectedProcType" ng-options="p.Text for p in procTypeList" ng-change="filterTable()"></select>
+                <!-- <select class="form-control form-control-sm" [(ngModel)]="filter.budgetLineId" required>
+                    <option *ngFor="let item of budgetLineList" [ngValue]="item.value">{{item.text}}</option>
+                </select> -->
             </td>
             <td></td>
             <td></td>
             <td>
-                <select class="mySelect form-control input-sm " ng-model="selectedProcStatus" ng-options="p.Text for p in procStatusList" ng-change="filterTable()"></select>
+                <!-- <select class="form-control form-control-sm" [(ngModel)]="filter.projectManagerId" required>
+                    <option *ngFor="let item of userList" [ngValue]="item.value">{{item.text}}</option>
+                </select> -->
+            </td>
+            <td>
+                <!-- <select class="mySelect form-control input-sm " ng-model="selectedAuthOfficer" ng-options="p.Text for p in authOfficerList" ng-change="filterTable()"></select> -->
+            </td>
+            <td>
+                <!-- <select class="mySelect form-control input-sm " ng-model="selectedProcOfficer" ng-options="p.Text for p in procOfficerList" ng-change="filterTable()"></select> -->
+            </td>
+            <td></td>
+            <td>
+                <!-- <select class="form-control form-control-sm" [(ngModel)]="filter.procTypeId" required>
+                    <option *ngFor="let item of procTypeList" [ngValue]="item.value">{{item.text}}</option>
+                </select> -->
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                <!-- <select class="form-control form-control-sm" [(ngModel)]="filter.procStatusId" required>
+                    <option *ngFor="let item of procStatusList" [ngValue]="item.value">{{item.text}}</option>
+                </select> -->
             </td>
         </tr>
-    </tbody>-->
+    </tbody>
 
     <tbody>
-        <!--<tr *ngFor="let procurement of procurementList | activityFilter : filter" style="cursor:pointer">-->
         <tr *ngFor="let procurement of procurementList| expenseFilter : filter" style="cursor:pointer">
             <td style="min-width:55px">
                 <!--<a tabindex="0" value="" uib-tooltip="Status chart" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}" popover-placement="right" popover-trigger="'outsideClick'" style="cursor:pointer" ng-click="openPopover(procurement);">
@@ -155,15 +179,7 @@
             <td>
                 {{procurement.status}}
             </td>
-            <!--<td class="col-md-1" ng-show="false">
-                {{procurement.unitCode}}
-            </td>
-            <td class="col-md-1" ng-show="false">
-                {{procurement.dpCode}}
-            </td>
-            <td class="col-md-1" ng-show="false">
-                {{procurement.sectionCode}}
-            </td>-->
+        
         </tr>
 
 

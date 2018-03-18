@@ -42,14 +42,13 @@ export class RequestExpenseComponent {
         
         let url = this.webServiceUrl + "/requestExpense/GetExpense/" + expenseId;
         this.http.get(url, { withCredentials: true }).subscribe(data => {
-            console.log(data.json());
             this.requestExpense = data.json();
         }, err => null);
     };
 
     loadLookupList() {
         //Reset selected expense
-        this.requestExpense = {};
+       // this.requestExpense = {};
         let url = this.webServiceUrl + "/lookuplist";
         this.http.get(url, { withCredentials: true }).subscribe(data => {
             this.awpList = data.json().awpList;

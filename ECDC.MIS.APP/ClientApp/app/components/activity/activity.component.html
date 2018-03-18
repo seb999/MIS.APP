@@ -6,20 +6,20 @@
 
 <!--Button clear filters-->
 <div style="margin-bottom:10px;float:left;">
-    <button type="button" class="btn btn-labeled btn-info " (click)="clearFilters()">
+    <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()">
         <span class="btn-label"><i class="fas fa-sync-alt"></i></span> Clear filter
     </button>
 
-    <button type="button" class="btn btn-labeled btn-info " (click)="exportToCsv()">
+    <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="exportToCsv()" > 
         <span class="btn-label"><i class="fas fa-file-excel"></i> Export to Excel</span> 
-        <ngb-progressbar type="warning" [value]="progress" [hidden]="progress<1" height=".2rem" [striped]="true"></ngb-progressbar>
+        <ngb-progressbar type="warning" [value]="progress" [hidden]="progress<1" height=".2rem" [striped]="true" ></ngb-progressbar>
     </button>
 </div>
 
 <!--Year filter-->
 <div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Year&nbsp;</div>
 <div class="dropdown" style="float:left;">
-    <select class="mySelect form-control input-sm " [(ngModel)]="selectedAwp" (ngModelChange)="loadLookupList()">
+    <select class="mySelect form-control form-control-sm" [(ngModel)]="selectedAwp" (ngModelChange)="loadLookupList()">
         <option *ngFor="let awp of awpList" [ngValue]="awp"> {{awp.text}} </option>
     </select>
 </div>
@@ -72,42 +72,42 @@
     <tbody class="avoid-sort">
         <tr class="trFilter">
             <td style="min-width:40px">
-                <input type="text" [(ngModel)]="filter.activityIdName" placeholder="Activity Id..." class="form-control input-sm" />
+                <input type="text" [(ngModel)]="filter.activityIdName" placeholder="Activity Id..." class="form-control form-control-sm" />
             </td>
             <td>
-                <input type="text" [(ngModel)]="filter.activityCode" placeholder="Activity code..." class="form-control input-sm" />
+                <input type="text" [(ngModel)]="filter.activityCode" placeholder="Activity code..." class="form-control form-control-sm" />
             </td>
             <td>
-                <input type="text" [(ngModel)]="filter.activityName" placeholder="Activity name..." class="form-control input-sm" />
+                <input type="text" [(ngModel)]="filter.activityName" placeholder="Activity name..." class="form-control form-control-sm" />
             </td>
             <td>
-                <select class="form-control input-sm" [(ngModel)]="filter.strategyId" required>
+                <select class="form-control form-control-sm" [(ngModel)]="filter.strategyId" required>
                     <option *ngFor="let item of strategyList" [ngValue]="item.value">{{item.text}}</option>
                 </select>
             </td>
             <td>
-                <select class="form-control input-sm" [(ngModel)]="filter.unitId" required>
-                    <option *ngFor="let item of unitList" [ngValue]="item.value">{{item.text}}</option>
+                <select class="form-control form-control-sm" [(ngModel)]="selectedUnit" (change)="unitChanged()" required>
+                    <option *ngFor="let item of unitList" [ngValue]="item" >{{item.text}}</option>
                 </select>
             </td>
             <td>
-                <select class="form-control input-sm" [(ngModel)]="filter.dpId" required>
+                <select class="form-control form-control-sm" [(ngModel)]="filter.dpId" required>
                     <option *ngFor="let item of dpList" [ngValue]="item.value">{{item.text}}</option>
                 </select>
             </td>
             <td>
-                <select class="form-control input-sm" [(ngModel)]="filter.sectionId">
+                <select class="form-control form-control-sm" [(ngModel)]="filter.sectionId">
                     <option *ngFor="let item of sectionList" [ngValue]="item.value">{{item.text}}</option>
                 </select>
             </td>
             <td>
-                <select class="form-control input-sm" [(ngModel)]="filter.activityLeaderId">
+                <select class="form-control form-control-sm" [(ngModel)]="filter.activityLeaderId">
                     <option *ngFor="let item of leaderList" [ngValue]="item.value">{{item.text}}</option>
                 </select>
             </td>
             <td></td>
             <td>
-                <select class="form-control input-sm" [(ngModel)]="filter.statusId">
+                <select class="form-control form-control-sm" [(ngModel)]="filter.statusId">
                     <option *ngFor="let item of statusList" [ngValue]="item.value">{{item.text}}</option>
                 </select>
             </td>

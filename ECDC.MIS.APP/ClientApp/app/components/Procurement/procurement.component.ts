@@ -18,13 +18,15 @@ export class ProcurementComponent {
     public unitList: LookupListItem[] = [] as any;
     public dpList: LookupListItem[] = [] as any;
     public sectionList: LookupListItem[] = [] as any;
+    public sectionListInitial: LookupListItem[]= [] as any;
+    public budgetLineList: LookupListItem[] = [] as any;
 
     public selectedAwp: any;
     public selectedUnit: any;
     public selectedDp: any;
     public selectedSection: any;
 
-    public showLoaded: boolean;
+    public showLoaded: boolean;  
     public mis4HostUrl: string;
     public webServiceUrl: string;
     public filter: Expense = {} as any;
@@ -67,6 +69,8 @@ export class ProcurementComponent {
             this.unitList = data.json().unitList;
             this.dpList = data.json().dpList;
             this.sectionList = data.json().sectionList;
+            this.sectionListInitial = data.json().sectionList;
+            this.budgetLineList = data.json().budgetLineList;
            
             this.clearFilters();
 
@@ -87,6 +91,12 @@ export class ProcurementComponent {
     clearFilters() {
         this.filter = {} as any;
         this.filter.dpId = 0;
-        this.filter.unitId = 0;
+        this.selectedUnit = this.unitList[0];
+    }
+
+    unitChanged(){
+        this.filter.unitId = this.selectedUnit.value;
+        this.sectionList = this.sectionListInitial;
+        this.sectionList = this.sectionList.filter(p => p.extraData === this.selectedUnit.value.toString() || p.extraData === "0");
     }
 }

@@ -6,11 +6,11 @@
 
 <!--Buttons-->
 <div style="margin-bottom:10px;float:left;">
-    <button type="button" class="btn btn-labeled btn-success" (click)="clearFilters()" data-toggle="modal" data-target="#editExpenseModal">
+    <button type="button" class="btn btn-labeled btn-success btn-sm" (click)="clearFilters()" data-toggle="modal" data-target="#editExpenseModal">
         <span class="btn-label"><i class="glyphicon glyphicon-repeat"></i></span> Request expense
     </button>
 
-    <button type="button" class="btn btn-labeled btn-info " (click)="clearFilters()">
+    <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()">
         <span class="btn-label"><i class="glyphicon glyphicon-repeat"></i></span> Clear filters
     </button>
 </div>
@@ -18,7 +18,7 @@
 <!--Year filter-->
 <div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Year&nbsp;</div>
 <div class="dropdown" style="float:left;">
-    <select class="mySelect form-control input-sm" [(ngModel)]="selectedAwp" (ngModelChange)="loadLookupList()">
+    <select class="mySelect form-control form-control-sm" [(ngModel)]="selectedAwp" (ngModelChange)="loadLookupList()">
         <option *ngFor="let awp of awpList" [ngValue]="awp"> {{awp.text}} </option>
     </select>
 </div>
@@ -26,7 +26,7 @@
 <!--Unit-->
 <div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Unit&nbsp;</div>
 <div class="dropdown" style="float:left;">
-    <select class="mySelect form-control input-sm" [(ngModel)]="filter.activityUnitId">
+    <select class="mySelect form-control form-control-sm" [(ngModel)]="filter.activityUnitId">
         <option *ngFor="let item of unitList" [ngValue]="item.value"> {{item.text}} </option>
     </select>
 </div>
@@ -34,7 +34,7 @@
 <!--DP-->
 <div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">DP &nbsp;</div>
 <div class="dropdown" style="float:left;">
-    <select class="mySelect form-control input-sm" [(ngModel)]="filter.activityDpId">
+    <select class="mySelect form-control form-control-sm" [(ngModel)]="filter.activityDpId">
         <option *ngFor="let item of dpList" [ngValue]="item.value"> {{item.text}} </option>
     </select>
 </div>
@@ -131,7 +131,7 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <select class="form-control input-sm" [(ngModel)]="filter.expenseTypeId">
+                                <select class="form-control form-control-sm" [(ngModel)]="filter.expenseTypeId">
                                     <option *ngFor="let item of expenseTypeList" [ngValue]="item.value">{{item.text}}</option>
                                 </select>
                             </td>
@@ -140,7 +140,7 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <select class="form-control input-sm" [(ngModel)]="filter.unitId">
+                                <select class="form-control form-control-sm" [(ngModel)]="filter.unitId">
                                     <option *ngFor="let item of unitList" [ngValue]="item.value">{{item.text}}</option>
                                 </select>
                             </td>
@@ -179,8 +179,8 @@
                     ...
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-sm">Save changes</button>
                 </div>
             </div>
         </div>

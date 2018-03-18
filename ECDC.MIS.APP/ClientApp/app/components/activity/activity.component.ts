@@ -20,20 +20,16 @@ export class ActivityComponent {
     public unitList: LookupListItem[]= [] as any;
     public dpList: LookupListItem[]= [] as any;
     public sectionList: LookupListItem[]= [] as any;
+    public sectionListInitial: LookupListItem[]= [] as any;
     public leaderList: LookupListItem[]= [] as any;
     public statusList: LookupListItem[]= [] as any;
 
     public selectedAwp: any;
-    public selectedStrategy: any;
     public selectedUnit: any;
-    public selectedDp: any;
-    public selectedSection: any;
-    public selectedLeader: any;
-    public selectedStatus: any;
+    public filter: Activity = {} as any;
 
     public showLoaded: boolean;
     public webServiceUrl: string;
-    public filter: Activity = {} as any;
     public progress: string = "0";
 
     constructor(public http: Http, private router: Router, @Inject('WEB_SERVICE_URL') apiUrl: string) {
@@ -72,6 +68,7 @@ export class ActivityComponent {
             this.unitList = data.json().unitList;
             this.dpList = data.json().dpList;
             this.sectionList = data.json().sectionList;
+            this.sectionListInitial = data.json().sectionList;
             this.leaderList = data.json().userList;
             this.statusList = data.json().activityStatusList;
 
@@ -100,6 +97,13 @@ export class ActivityComponent {
         this.filter.sectionId = 0;
         this.filter.activityLeaderId = 0;
         this.filter.statusId = 0;
+        this.selectedUnit = this.unitList[0];
+    }
+
+    unitChanged(){
+        this.filter.unitId = this.selectedUnit.value;
+        this.sectionList = this.sectionListInitial;
+        this.sectionList = this.sectionList.filter(p => p.extraData === this.selectedUnit.value.toString() || p.extraData === "0");
     }
 
     onSorted(criteria: ColumnSortedEvent) {
@@ -129,4 +133,6 @@ export class ActivityComponent {
             setTimeout(() => { this.progress = "0" }, 2000)
         }, err => null);
     }
+
+    
 }
