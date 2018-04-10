@@ -2,4 +2,185 @@
 
 <div *ngIf="showLoaded" class="overlay"></div>
 <div *ngIf="showLoaded" id="loaderModernize"></div>
-<p *ngIf="!requestExpenseList"><em>Loading...</em></p>
+<p *ngIf="!budgetTransferList"><em>Loading...</em></p>
+
+<!--Button clear filters-->
+<div style="margin-bottom:10px;float:left;">
+    <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()">
+        <span class="btn-label"><i class="fas fa-sync-alt"></i></span> Clear filter
+    </button>
+
+    <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="exportToCsv()">
+        <span class="btn-label"><i class="fas fa-file-excel"></i> Export to Excel</span>
+        <ngb-progressbar type="warning" [value]="progress" [hidden]="progress<1" height=".2rem" [striped]="true"></ngb-progressbar>
+    </button>
+</div>
+
+<!--Year filter-->
+<div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Year&nbsp;</div>
+<div class="dropdown" style="float:left;">
+    <select class="mySelect form-control form-control-sm" [(ngModel)]="selectedAwp" (ngModelChange)="loadLookupList()">
+        <option *ngFor="let awp of awpList" [ngValue]="awp"> {{awp.text}} </option>
+    </select>
+</div>
+
+<!--Financial initiator-->
+<!--<div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">DP&nbsp;</div>
+<div class="dropdown" style="float:left;">
+    <select class="form-control form-control-sm" [(ngModel)]="filter.dpId" required>
+        <option *ngFor="let item of dpList" [ngValue]="item.value">{{item.text}}</option>
+    </select>
+</div>-->
+
+<!--Transfer type-->
+<!--<div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">DP&nbsp;</div>
+<div class="dropdown" style="float:left;">
+    <select class="form-control form-control-sm" [(ngModel)]="filter.dpId" required>
+        <option *ngFor="let item of dpList" [ngValue]="item.value">{{item.text}}</option>
+    </select>
+</div>-->
+
+<!--Expense id source-->
+<!--<div style="float:left">
+    <input type="text" [(ngModel)]="filter.expenseIdName" placeholder="Expense Id source..." class="form-control form-control-sm" />
+</div>-->
+
+<!--Expense id target-->
+<!--<div style="float:left">
+    <input type="text" [(ngModel)]="filter.expenseIdName" placeholder="Expense Id target..." class="form-control form-control-sm" />
+</div>-->
+
+<table class="table table-striped table-bordered table-hover table-condensed table-sm">
+    <thead id="tableHeader">
+        <tr>
+            <th>
+            </th>
+            <th>
+                Id
+            </th>
+            <th>
+                Source activity
+            </th>
+            <th>
+                Source BL
+            </th>
+            <th>
+                Target activity
+            </th>
+            <th>
+                Target BL
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                HoU Source
+            </th>
+            <th>
+                HoU target
+            </th>
+            <th>
+                Finance Init.
+            </th>
+            <th>
+                Finance
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+    </thead>
+
+    <!--<tbody class="avoid-sort">
+        <tr class="trFilter">
+            <td></td>
+            <td>
+                <input type="text" [(ngModel)]="filter.expenseIdName" placeholder="Expense Id..." class="form-control form-control-sm" />
+            </td>
+            <td>
+                <select class="form-control form-control-sm" [(ngModel)]="filter.budgetLineId" required>
+                    <option *ngFor="let item of budgetLineList" [ngValue]="item.value">{{item.text}}</option>
+                </select>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                <select class="form-control form-control-sm" [(ngModel)]="filter.projectManagerId" required>
+                    <option *ngFor="let item of projectManagerList" [ngValue]="item.value">{{item.text}}</option>
+                </select>
+            </td>
+            <td>
+                <select class="form-control form-control-sm" [(ngModel)]="filter.authOfficerId" required>
+                    <option *ngFor="let item of authOfficerList" [ngValue]="item.value">{{item.text}}</option>
+                </select>
+            </td>
+            <td>
+                <select class="form-control form-control-sm" [(ngModel)]="filter.procOfficerId" required>
+                    <option *ngFor="let item of procOfficerList" [ngValue]="item.value">{{item.text}}</option>
+                </select>
+            </td>
+            <td></td>
+            <td>
+                <select class="form-control form-control-sm" [(ngModel)]="filter.procTypeId" required>
+                    <option *ngFor="let item of procTypeList" [ngValue]="item.value">{{item.text}}</option>
+                </select>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                <select class="form-control form-control-sm" [(ngModel)]="filter.procStatusId" required>
+                    <option *ngFor="let item of procStatusList" [ngValue]="item.value">{{item.text}}</option>
+                </select>
+            </td>
+        </tr>
+    </tbody>-->
+
+    <tbody>
+        <!--<tr *ngFor="let procurement of procurementList| expenseFilter : filter" style="cursor:pointer">-->
+        <tr *ngFor="let bt of budgetTransferList" style="cursor:pointer">
+            <td style="min-width:55px"></td>
+            <td>
+                {{bt.petId}}
+            </td>
+            <td>
+                {{bt.sourceActivityCode}}
+            </td>
+            <td>
+                <span placement="right" ngbTooltip="{{bt.sourceBudgetLine}}">{{bt.sourceBudgetLineCode}}</span>
+                {{bt.sourceBudgetLineCode}}
+            </td>
+            <td>
+                {{bt.targetActivityCode}}
+            </td>
+            <td>
+                <span placement="right" ngbTooltip="{{bt.targetBudgetLine}}">{{bt.targetBudgetLineCode}}</span>
+            </td>
+            <td>
+                {{bt.amount}}
+            </td>
+
+            <td *ngIf="bt.sourceIsHoUAutorized" style="color:green"><i class="far fa-thumbs-up" placement="right" ngbTooltip="Approved by {{bt.sourceHoUFullNameAutorize}} the {{bt.sourceHoUAutorizedDate| date :'dd/MM/yyyy'}}"></i> Approved</td>
+            <td *ngIf="bt.sourceIsHoURejected" style="color:red"><i class="far fa-thumbs-down" placement="right" ngbTooltip="Rejected by {{bt.rejectedFullName}} the {{bt.sourceHoURejectedDate| date :'dd/MM/yyyy'}}"></i> Rejected</td>
+            <td *ngIf="!bt.sourceIsHoUAutorized && !bt.sourceIsHoURejected"></td>
+
+            <td *ngIf="bt.targetIsHoUAutorized" style="color:green"><i class="far fa-thumbs-up" placement="right" ngbTooltip="Approved by {{bt.targetHoUFullNameAutorize}} the {{bt.targetHoUAutorizedDate| date :'dd/MM/yyyy'}}"></i> Approved</td>
+            <td *ngIf="bt.targetIsHoURejected" style="color:red"><i class="far fa-thumbs-down" placement="right" ngbTooltip="Rejected by {{bt.rejectedFullName}} the {{bt.targetHoURejectedDate| date :'dd/MM/yyyy'}}"></i> Rejected</td>
+            <td *ngIf="!bt.targetIsHoUAutorized && !bt.targetIsHoURejected"></td>
+
+            <td *ngIf="bt.petStatusIsExecuted && bt.isFinanceInitiatorNeeded" style="color:green"><i class="far fa-thumbs-up" placement="right" ngbTooltip="Approved by {{bt.financeAutorizeFullName}} the {{bt.financeAutorizeDate| date :'dd/MM/yyyy'}}"></i> Approved</td>
+            <td *ngIf="bt.financeInitiatorRejected" style="color:red"><i class="far fa-thumbs-down" placement="right" ngbTooltip="Rejected by {{bt.rejectedFullName}} the {{bt.financeRejectedDate| date :'dd/MM/yyyy'}}"></i> Rejected</td>
+            <td *ngIf="!bt.isFinanceInitiatorNeeded"></td>
+            <td *ngIf="bt.isFinanceInitiatorNeeded && !bt.financeInitiatorRejected && !bt.petStatusIsExecuted"></td>
+
+            <td *ngIf="bt.petStatusIsExecuted && bt.isFinanceNeeded" style="color:green"><i class="far fa-thumbs-up" placement="right" ngbTooltip="Approved by {{bt.financeAutorizeFullName}} the {{bt.financeAutorizeDate| date :'dd/MM/yyyy'}}"></i> Approved</td>
+            <td *ngIf="bt.financeRejected" style="color:red"><i class="far fa-thumbs-down" placement="right" ngbTooltip="Rejected by {{bt.rejectedFullName}} the {{bt.financeRejectedDate| date :'dd/MM/yyyy'}}"></i> Rejected</td>
+            <td *ngIf="!bt.isFinanceNeeded"></td>
+            <td *ngIf="bt.isFinanceNeeded && !bt.financeRejected && !bt.petStatusIsExecuted"></td>
+
+            <td *ngIf="bt.petStatusIsPending" style="color:darkorange"><i class="glyphicon glyphicon-star" placement="left" ngbTooltip="Pending"></i> Pending</td>
+            <td *ngIf="bt.petStatusIsExecuted" style="color:dodgerblue"><i class="far fa-thumbs-up" placement="left" ngbTooltip="Executed by {{bt.userModFullName}} the {{bt.dateMod| date :'dd/MM/yyyy'}}"></i> Executed</td>
+            <td *ngIf="bt.petStatusIsRejected" style="color:red"><i class="far fa-thumbs-down" placement="left" ngbTooltip="Rejected by {{bt.userModFullName}} the {{bt.dateMod| date :'dd/MM/yyyy'}}"></i> Rejected</td>
+
+        </tr>
+    </tbody>
+</table>

@@ -84,23 +84,20 @@
             </li>
         </ul>
 
-        <div *ngIf="userProfile != null" style="color:white;font-size:small" class="hidden-md">
-            {{userProfile?.userFullName}}
-            <a id="userProfile" tabindex="0" value="" data-toggle="popover" title="My profile" data-placement="bottom" data-trigger="focus" style="cursor:pointer">
-                <i id="profileIcon" style="color:darkorange;font-size:1.2em" class="fa fa-user" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="Show my profile"></i>
-            </a>
-            |
-            {{userProfile?.unit.unitCode}}
-            |
-            {{userProfile?.dsp.dspCode}}
-            |
-            {{userProfile?.section.sectionCode}}
-            <a asp-controller="Admin" asp-action="Index">
-                <i id="adminIcon" class="fa fa-cogs" aria-hidden="true" style="margin-left:15px;color:darkorange;font-size:1.2em;cursor:pointer" data-toggle="tooltip" data-placement="left" title="MIS Admin" ></i>
-            </a>
-            <br />
-            {{userProfile?.userRole.userRoleName}}<br />
-
+        <div style="color:white;font-size:small" class="hidden-md">
+            <div>
+                {{userProfile?.userFullName}}
+                <a id="userProfile" tabindex="0" value="" data-toggle="popover" title="My profile" data-placement="bottom" data-trigger="focus" style="cursor:pointer">
+                    <i id="profileIcon" style="color:darkorange;font-size:1.2em" class="fa fa-user" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="Show my profile"></i>
+                </a>
+                <span *ngIf="userProfile == null"><em>Loading...</em></span>
+                <span *ngIf="userProfile != null">| {{userProfile?.unit.unitCode}} | {{userProfile?.dsp.dspCode}} | {{userProfile?.section.sectionCode}}</span>
+                <a asp-controller="Admin" asp-action="Index">
+                    <i id="adminIcon" class="fa fa-cogs" aria-hidden="true" style="margin-left:15px;color:darkorange;font-size:1.2em;cursor:pointer" data-toggle="tooltip" data-placement="left" title="MIS Admin"></i>
+                </a>
+                <br />
+                {{userProfile?.userRole.userRoleName}}&nbsp;
+            </div>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchString" name="first"> 
                 <button class="btn btn-sm btn-warning my-2 my-sm-0" type="button" (click)="search()">Search</button>

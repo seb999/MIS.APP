@@ -26,6 +26,7 @@ export class ActivityComponent {
 
     public selectedAwp: any;
     public selectedUnit: any;
+    public selectedSection: any;
     public filter: Activity = {} as any;
 
     public showLoaded: boolean;
@@ -72,9 +73,10 @@ export class ActivityComponent {
             this.leaderList = data.json().userList;
             this.statusList = data.json().activityStatusList;
 
-            this.clearFilters();
-
-           this.loadActivity();
+            this.initFilters();
+            this.loadActivity();
+            this.retrieveFilters();
+            
 
         }, err => null);
     };
@@ -88,7 +90,9 @@ export class ActivityComponent {
         }, err => null);
     }
 
-    clearFilters() {
+    
+
+    initFilters() {
         this.filter = {} as any;
         this.filter.dpId = 0;
         this.filter.unitId = 0;
@@ -124,6 +128,22 @@ export class ActivityComponent {
         this.router.navigate(["home", ""]);
     };
 
+
+    //---------------------------Default methods----------------------------------
+    clearFilters() {
+        localStorage.clear();
+        this.initFilters();
+    }
+
+    saveFilters() {
+        localStorage.setItem("myFilter", JSON.stringify(this.filter));
+    }
+
+    retrieveFilters() {
+        this.filter = JSON.parse(localStorage.getItem('myFilter') || "");
+        this.selectedUnit = this.unitList.find(p => p.value == this.filter.unitId);
+    }
+
     exportToCsv() {
         this.progress = "1";
         let url = this.webServiceUrl + "/activity/exportData/" + this.selectedAwp.value;
@@ -132,7 +152,5 @@ export class ActivityComponent {
             this.progress = "100";
             setTimeout(() => { this.progress = "0" }, 2000)
         }, err => null);
-    }
-
-    
+    } 
 }

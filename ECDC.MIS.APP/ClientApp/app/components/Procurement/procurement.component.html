@@ -46,8 +46,9 @@
 <!--Section filter-->
 <div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Section&nbsp;</div>
 <div class="dropdown" style="float:left;">
-    <select class="form-control form-control-sm" [(ngModel)]="filter.sectionId" required>
+    <select class="form-control form-control-sm" [(ngModel)]="filter.sectionId">
         <option *ngFor="let item of sectionList" [ngValue]="item.value">{{item.text}}</option>
+       
     </select>
 </div>
 
@@ -103,35 +104,39 @@
                 <input type="text" [(ngModel)]="filter.expenseIdName" placeholder="Expense Id..." class="form-control form-control-sm" />
             </td>
             <td>
-                <!-- <select class="form-control form-control-sm" [(ngModel)]="filter.budgetLineId" required>
+                 <select class="form-control form-control-sm" [(ngModel)]="filter.budgetLineId" required>
                     <option *ngFor="let item of budgetLineList" [ngValue]="item.value">{{item.text}}</option>
-                </select> -->
+                </select> 
             </td>
             <td></td>
             <td></td>
             <td>
-                <!-- <select class="form-control form-control-sm" [(ngModel)]="filter.projectManagerId" required>
-                    <option *ngFor="let item of userList" [ngValue]="item.value">{{item.text}}</option>
-                </select> -->
+                 <select class="form-control form-control-sm" [(ngModel)]="filter.projectManagerId" required>
+                    <option *ngFor="let item of projectManagerList" [ngValue]="item.value">{{item.text}}</option>
+                </select> 
             </td>
             <td>
-                <!-- <select class="mySelect form-control input-sm " ng-model="selectedAuthOfficer" ng-options="p.Text for p in authOfficerList" ng-change="filterTable()"></select> -->
+                <select class="form-control form-control-sm" [(ngModel)]="filter.authOfficerId" required>
+                    <option *ngFor="let item of authOfficerList" [ngValue]="item.value">{{item.text}}</option>
+                </select>
             </td>
             <td>
-                <!-- <select class="mySelect form-control input-sm " ng-model="selectedProcOfficer" ng-options="p.Text for p in procOfficerList" ng-change="filterTable()"></select> -->
+                <select class="form-control form-control-sm" [(ngModel)]="filter.procOfficerId" required>
+                    <option *ngFor="let item of procOfficerList" [ngValue]="item.value">{{item.text}}</option>
+                </select>
             </td>
             <td></td>
             <td>
-                <!-- <select class="form-control form-control-sm" [(ngModel)]="filter.procTypeId" required>
+                <select class="form-control form-control-sm" [(ngModel)]="filter.procTypeId" required>
                     <option *ngFor="let item of procTypeList" [ngValue]="item.value">{{item.text}}</option>
-                </select> -->
+                </select>
             </td>
             <td></td>
             <td></td>
             <td>
-                <!-- <select class="form-control form-control-sm" [(ngModel)]="filter.procStatusId" required>
+                 <select class="form-control form-control-sm" [(ngModel)]="filter.procStatusId" required>
                     <option *ngFor="let item of procStatusList" [ngValue]="item.value">{{item.text}}</option>
-                </select> -->
+                </select> 
             </td>
         </tr>
     </tbody>
@@ -139,9 +144,11 @@
     <tbody>
         <tr *ngFor="let procurement of procurementList| expenseFilter : filter" style="cursor:pointer">
             <td style="min-width:55px">
-                <!--<a tabindex="0" value="" uib-tooltip="Status chart" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}" popover-placement="right" popover-trigger="'outsideClick'" style="cursor:pointer" ng-click="openPopover(procurement);">
+                <ng-template #popContent>Hello, <b>{{procurement.expenseId}}</b>!</ng-template>
+                <a value="" [ngbPopover]="popContent" popoverTitle="Je ne sais pas" placement="right" style="cursor:pointer" triggers="mouseenter:mouseleave">
                     <span class="btn-label" style="color:dodgerblue;"><i class="far fa-chart-bar" aria-hidden="true"></i></span>
-                </a>-->
+                </a>
+
             </td>
             <td>
                 {{procurement.expenseId}}
@@ -177,11 +184,8 @@
                 {{(procurement.plannedExpectedContractSignature ? procurement.plannedExpectedContractSignature : (procurement.plannedExpectedLaunch ? procurement.plannedExpectedLaunch : procurement.plannedKickoffDate))| date :'dd/MM/yyyy'}}
             </td>
             <td>
-                {{procurement.status}}
+                {{procurement.procStatus}}
             </td>
-        
         </tr>
-
-
     </tbody>
 </table>

@@ -5,6 +5,7 @@ import { LookupListItem } from '../shared/lookupListItem';
 import { ColumnSortedEvent } from '../sortableTable/sort.service';
 import { DomSanitizer  } from '@angular/platform-browser';
 import { Expense } from '../shared/interface/expense.interface';
+import { Angular2Csv } from 'angular2-csv';
 
 @Component({
     selector: 'procurement',
@@ -20,11 +21,14 @@ export class ProcurementComponent {
     public sectionList: LookupListItem[] = [] as any;
     public sectionListInitial: LookupListItem[]= [] as any;
     public budgetLineList: LookupListItem[] = [] as any;
+    public procTypeList: LookupListItem[] = [] as any;
+    public procStatusList: LookupListItem[] = [] as any;
+    public projectManagerList: LookupListItem[] = [] as any;
+    public procOfficerList: LookupListItem[] = [] as any;
+    public authOfficerList: LookupListItem[] = [] as any;
 
     public selectedAwp: any;
     public selectedUnit: any;
-    public selectedDp: any;
-    public selectedSection: any;
 
     public showLoaded: boolean;  
     public mis4HostUrl: string;
@@ -64,18 +68,22 @@ export class ProcurementComponent {
                     }
                 }
             }
-
-           
+            console.log(this.selectedAwp);
             this.unitList = data.json().unitList;
             this.dpList = data.json().dpList;
             this.sectionList = data.json().sectionList;
             this.sectionListInitial = data.json().sectionList;
             this.budgetLineList = data.json().budgetLineList;
-           
+            console.log(this.budgetLineList);
+            this.budgetLineList = this.budgetLineList.filter(p => p.extraData === this.selectedAwp.extraData || p.extraData === "");
+            this.procTypeList = data.json().procTypeList;
+            this.procStatusList = data.json().procStatusList;
+            this.procOfficerList = data.json().procOfficerList;
+            this.authOfficerList = data.json().authOfficerList;
+            this.projectManagerList = data.json().userList;
+
             this.clearFilters();
-
             this.loadProcurement();
-
         }, err => null);
     };
 
@@ -91,6 +99,13 @@ export class ProcurementComponent {
     clearFilters() {
         this.filter = {} as any;
         this.filter.dpId = 0;
+        this.filter.sectionId = 0;
+        this.filter.budgetLineId = 0;
+        this.filter.projectManagerId = 0;
+        this.filter.authOfficerId = 0;
+        this.filter.procOfficerId = 0;
+        this.filter.procTypeId = 0;
+        this.filter.procStatusId = 0;
         this.selectedUnit = this.unitList[0];
     }
 
@@ -98,5 +113,15 @@ export class ProcurementComponent {
         this.filter.unitId = this.selectedUnit.value;
         this.sectionList = this.sectionListInitial;
         this.sectionList = this.sectionList.filter(p => p.extraData === this.selectedUnit.value.toString() || p.extraData === "0");
+    }
+
+    exportToCsv() {
+        this.progress = "1";
+        let url = this.webServiceUrl + "/procurement/exportData/" + this.selectedAwp.value;
+        this.http.get(url, { withCredentials: true }).subscribe(data => {
+            new Angular2Csv(data.json(), 'MISProcurement', { headers: Object.keys(data.json()[0]) });
+            this.progress = "100";
+            setTimeout(() => { this.progress = "0" }, 2000)
+        }, err => null);
     }
 }

@@ -6,7 +6,7 @@
 
 <!--Button clear filters-->
 <div style="margin-bottom:10px;float:left;">
-    <button type="button" class="btn btn-labeled btn-info " (click)="clearFilters()">
+    <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()">
         <span class="btn-label"><i class="glyphicon glyphicon-repeat"></i></span> Clear filter
     </button>
 </div>
@@ -14,13 +14,13 @@
 <!--Year filter-->
 <div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Year&nbsp;</div>
 <div class="dropdown" style="float:left;">
-    <select class="mySelect form-control input-sm" [(ngModel)]="selectedAwp" (ngModelChange)="loadLookupList()">
+    <select class="mySelect form-control form-control-sm" [(ngModel)]="selectedAwp" (ngModelChange)="loadLookupList()">
         <option *ngFor="let awp of awpList" [ngValue]="awp"> {{awp.text}} </option>
     </select>
 </div>
 
 <div style="margin-bottom:10px;float:left;margin-left:7px">
-    <input type="text" [(ngModel)]="filter.staffName" placeholder="Staff name..." class="form-control input-sm" />
+    <input type="text" [(ngModel)]="filter.staffName" placeholder="Staff name..." class="form-control form-control-sm" />
 </div>
 
 <div style="clear:both"></div>

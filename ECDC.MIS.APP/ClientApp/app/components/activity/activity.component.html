@@ -98,6 +98,7 @@
             <td>
                 <select class="form-control form-control-sm" [(ngModel)]="filter.sectionId">
                     <option *ngFor="let item of sectionList" [ngValue]="item.value">{{item.text}}</option>
+                    {{item}}
                 </select>
             </td>
             <td>
@@ -116,7 +117,7 @@
 
     <tbody>
 
-        <tr *ngFor="let activity of activityList | activityFilter : filter" style="cursor:pointer" [routerLink]="['/activityDetail', activity.activityId]">
+        <tr *ngFor="let activity of activityList | activityFilter : filter" style="cursor:pointer" [routerLink]="['/activityDetail', activity.activityId]" (click)="saveFilters();">
             <td style="min-width:80px">
                 {{activity.activityId}}
             </td>

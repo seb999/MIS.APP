@@ -11,15 +11,15 @@
 </div> -->
 <!--Buttons-->
 <div style="margin-bottom:10px;float:left;">
-    <button type="button" class="btn btn-labeled btn-success" (click)="clearFilters()" data-toggle="modal" data-target="#editExpenseModal">
+    <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()" data-toggle="modal" data-target="#editExpenseModal">
         <span class="btn-label"><i class="glyphicon glyphicon-repeat"></i></span> Edit
     </button>
 
-    <button type="button" class="btn btn-labeled btn-warning" (click)="previous()" [disabled]="disablePrevious">
+    <button type="button" class="btn btn-labeled btn-warning btn-sm" (click)="previous()" [disabled]="disablePrevious">
         <<
     </button>
 
-    <button type="button" class="btn btn-warning" (click)="next()" [disabled]="disableNext">
+    <button type="button" class="btn btn-warning btn-sm" (click)="next()" [disabled]="disableNext">
         >>
     </button>
 </div>

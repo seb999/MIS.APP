@@ -40,7 +40,7 @@ export class NavMenuComponent {
         }, err => null);
     }
 
-    search(){
-        this.router.navigate(['/search',this.searchString]);
+    search() {
+        if (this.searchString.length>=3) this.router.navigate(['/search',this.searchString]);
     }
 }

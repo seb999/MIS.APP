@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnInit, ViewChild, ElementRef, Inject } from 
 import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LookupListItem } from '../shared/lookupListItem';
+import { Activity } from '../shared/interface/activity.interface';
+import { Angular2Csv } from 'angular2-csv';
 
 @Component({
     selector: 'activityDetail',
@@ -11,9 +13,17 @@ import { LookupListItem } from '../shared/lookupListItem';
 export class ActivityDetailComponent {
     public activityId: number;
     public activity: any;
+    public budgetTransferSummary: any;
+    public monitoringData : any;
+    public monitorEditMode: boolean = false;
+
+    public activityStatusList: LookupListItem[] = [] as any;
+    public filter: Activity = {} as any;
 
     public showLoaded: boolean;
     public webServiceUrl: string;
+    public progress1: string = "0";
+    public progress2: string = "0";
 
     @ViewChild("tabs") tabs: any;
 
@@ -29,7 +39,10 @@ export class ActivityDetailComponent {
             this.activityId = +params['activityId'];
         });
 
+        this.loadLookupList();
         this.loadActivity();
+        this.loadBudgetTransferSummary();
+        this.loadMonitoring();
     }
 
     ngAfterViewInit() {
@@ -39,12 +52,35 @@ export class ActivityDetailComponent {
             localStorage.setItem('origine', '');
          }
     }
-    
+
+    loadLookupList() {
+        let url = this.webServiceUrl + "/lookuplist";
+        this.http.get(url, { withCredentials: true }).subscribe(data => {
+            this.activityStatusList = data.json().activityStatusList;
+        }, err => null);
+    };
+
     loadActivity(): any {
         let url = this.webServiceUrl + "/activity/GetActivity/" + this.activityId;
         this.http.get(url, { withCredentials: true }).subscribe(data => {
             this.activity = data.json();
-            console.log(this.activity);
+            this.showLoaded = false;
+        }, err => null);
+    }
+
+    loadBudgetTransferSummary() {
+        let url = this.webServiceUrl + "/budgettransfer/activity/" + this.activityId;
+        this.http.get(url, { withCredentials: true }).subscribe(data => {
+            this.budgetTransferSummary = data.json();
+            this.showLoaded = false;
+        }, err => null);
+    }
+
+    loadMonitoring() {
+        let url = this.webServiceUrl + "/monitoring/activityId/" + this.activityId;
+        this.http.get(url, { withCredentials: true }).subscribe(data => {
+            this.monitoringData = data.json();
+            debugger;
             this.showLoaded = false;
         }, err => null);
     }
@@ -52,5 +88,29 @@ export class ActivityDetailComponent {
     redirect(activityId :number,expenseId : number){
         localStorage.setItem('origine', 'budgetTab');
         this.router.navigate(["expenseDetail", activityId, expenseId]);
+    };
+
+    monitorActivity() {
+        this.monitorEditMode = true;
     }
+
+    exportExpenseToCsv() {
+        this.progress1 = "1";
+        let url = this.webServiceUrl + "/expense/exportData/" + this.activityId;
+        this.http.get(url, { withCredentials: true }).subscribe(data => {
+            new Angular2Csv(data.json(), 'MISExpense', { headers: Object.keys(data.json()[0]) });
+            this.progress1 = "100";
+            setTimeout(() => { this.progress1 = "0" }, 2000)
+        }, err => null);
+    } 
+
+    exportBudgetTransferToCsv() {
+        this.progress2 = "1";
+        let url = this.webServiceUrl + "/budgettransfer/exportData/" + this.activityId;
+        this.http.get(url, { withCredentials: true }).subscribe(data => {
+            new Angular2Csv(data.json(), 'MISExpense', { headers: Object.keys(data.json()[0]) });
+            this.progress2 = "100";
+            setTimeout(() => { this.progress2 = "0" }, 2000)
+        }, err => null);
+    } 
 }

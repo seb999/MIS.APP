@@ -2,37 +2,33 @@
 
 <div *ngIf="showLoaded" class="overlay"></div>
 <div *ngIf="showLoaded" id="loaderModernize"></div>
-
-
+<p *ngIf="!activityList"><em>Loading...</em></p>
 
 <!--Year filter-->
 <div class="dropdown" style="float:left;margin-top:7px;">Year&nbsp;</div>
 <div class="dropdown" style="float:left;">
-    <select class="mySelect form-control input-sm " [(ngModel)]="selectedAwp" (ngModelChange)="getUserFte()">
+    <select class="mySelect form-control form-control-sm " [(ngModel)]="selectedAwp" (ngModelChange)="getUserFte()">
         <option *ngFor="let awp of awpList" [ngValue]="awp"> {{awp.text}} </option>
     </select>
 </div>
 
-<form class="form-inline">
-    <div class="form-group">
-        <div class="input-group">
+
+        <!--<div class="input-group">
             <input class="form-control" placeholder="dd/mm/yyyy"
                    name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
                     <i class="fa fa-calendar-alt"></i>
-                    <!--<img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />-->
-                </button>
-            </div>
-        </div>
-    </div>
-</form>
+                </button> 
+            </div> 
+        </div>--> 
+
+
 
 <!-- Button trigger modal -->
 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Launch Bootstrap 4 modal
 </button> -->
-
 <!-- Modal -->
 <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -53,17 +49,9 @@
         </div>
     </div>
 </div> -->
-
-<!-- <button type="button" class="btn btn-outline-secondary" placement="top" style="float:right;margin-top:7px;"
-        ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." popoverTitle="Popover on top">
-    Popover from ng-boostrap
-</button> -->
-
 <!-- <button type="button" class="btn btn-outline-secondary" placement="top" ngbTooltip="Tooltip on top">
     Tooltip on top
 </button> -->
-
-
 <!--<form class="form-inline">
     <div class="form-group">
         <div class="input-group">
@@ -79,9 +67,8 @@
 </form>-->
 
 <div style="clear:both; font-size:1px;"></div>
-<br>
 
-<div class="row">
+<div class="row" style="margin-top:10px">
     <div class="col-3">
         <!--Profile block-->
         <div class="card ">
@@ -90,21 +77,21 @@
             </div>
             <div class="card-block">
 
-                <ul class="list-group" style="padding:0px">
-                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                <ul class="list-group" style="padding:0px" *ngIf="userProfile">
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px;">
                         <div style="float:left">
                             <p class="label">Login</p>
                             <p class="labelC">{{userProfile?.userLoginName}}</p>
                         </div>
                         <div style="float:right">
-                            <div class="mx-auto"><img src="data:image/JPEG;base64,{{userProfile?.userPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" /></div>
+                            <div class="mx-auto" *ngIf="userProfile"><img src="data:image/JPEG;base64,{{userProfile?.userPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" /></div>
                         </div>
                     </li>
-                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
                         <p class="label">Name</p>
                         <p class="labelC">{{userProfile?.userFullName}}</p>
                     </li>
-                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
                         <div class="row">
                             <div class="col-3">
                                 <p class="label">Unit</p>
@@ -112,22 +99,22 @@
                             </div>
                             <div class="col-5">
                                 <p class="label">DP</p>
-                                <p class="labelC">{{userProfile?.dsp.dspCode}}</p>                            
+                                <p class="labelC">{{userProfile?.dsp.dspCode}}</p>
                             </div>
                             <div class="col-4">
                                 <p class="label">Section</p>
-                                <p class="labelC">{{userProfile?.section.sectionCode}}</p>                             
-                             </div>
+                                <p class="labelC">{{userProfile?.section.sectionCode}}</p>
+                            </div>
                         </div>
                     </li>
-                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
                         <p class="label">Grade</p>
-                        <p class="labelC">{{userProfile?.userGrade.userGradeName}}</p>    
+                        <p class="labelC">{{userProfile?.userGrade.userGradeName}}</p>
                     </li>
-                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
                         <p class="label">Role</p>
                         <p class="labelC">{{userProfile?.userRole.userRoleName}}</p>
-                        
+
                     </li>
                 </ul>
             </div>
@@ -138,9 +125,10 @@
         <div class="card">
             <div class="card-header bg-info text-white">My activities</div>
             <div class="card-block" style="height:100%">
-                <table class="table table-striped table-bordered table-sm">
+                <table class="table table-striped table-bordered table-sm" style="margin-bottom:0px">
                     <thead>
                         <tr>
+                            <th>Activity Id</th>
                             <th>Activity code</th>
                             <th>Activity name</th>
                             <th>Strategy</th>
@@ -154,6 +142,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let activity of activityList" ng-repeat="activity in activityList" style="cursor:pointer" [routerLink]="['/activityDetail', activity.activityId]">
+                            <td>{{activity.activityId}}</td>
                             <td>{{activity.activityCode}}</td>
                             <td>{{activity.activityName}}</td>
                             <td>{{activity.strategyCode}}</td>
@@ -181,7 +170,7 @@
         <!--Chart-->
         <div class="card ">
             <div class="card-header bg-info text-white">
-                    Distribution
+                Distribution
             </div>
             <div class="card-block">
                 <div style="padding-left:0px">
@@ -198,9 +187,10 @@
             <div class="card-header bg-info text-white">My time allocated</div>
             <div class="card-block">
 
-                <table class="table table-bordered table-striped table-sm">
+                <table class="table table-bordered table-striped table-sm" style="margin-bottom:0px">
                     <thead>
                         <tr>
+                            <th>Activity Id</th>
                             <th>Activity code</th>
                             <th>Activity name</th>
                             <th>Expense name</th>
@@ -211,8 +201,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let expenseStaff of expenseStaffList" style="cursor:pointer">
-                            <td>fdsfds{{expenseStaff.activityCode}}</td>
+                        <tr *ngFor="let expenseStaff of expenseStaffList" style="cursor:pointer" [routerLink]="['/activityDetail', expenseStaff.activityId]">
+                            <td>{{expenseStaff.activityId}}</td>
+                            <td>{{expenseStaff.activityCode}}</td>
                             <td>{{expenseStaff.activityName}}</td>
                             <td>{{expenseStaff.expenseName}}</td>
                             <td>{{expenseStaff.planDay}}</td>

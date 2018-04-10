@@ -1,5 +1,78 @@
 <h3>Search</h3>
 
+<div class="alert alert-danger small col-3" role="alert" style="float:right; height:30px;padding:4px; padding-left:15px;" *ngIf="messageContent">{{messageContent}}</div>
+
 <div *ngIf="showLoaded" class="overlay"></div>
 <div *ngIf="showLoaded" id="loaderModernize"></div>
-<p *ngIf="!requestExpenseList"><em>Loading...</em></p>
+<p *ngIf="!activityList"><em>Loading...</em></p>
+
+<form class="form-inline my-1 my-lg-0">
+    <input class="form-control form-control-sm mr-sm-1" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchString" name="first">
+    <button class="btn btn-sm btn-info" type="button" (click)="search()">Search</button>
+
+</form>
+
+
+
+<br />
+
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header bg-info text-white">Activity found</div>
+            <div class="card-block" style="height:100%">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>AWP</th>
+                            <th>Activity Id </th>
+                            <th>Activity code</th>
+                            <th>Activity name</th>
+                            <th>Activity description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let activity of activityList" style="cursor:pointer" [routerLink]="['/activityDetail', activity.activityId]">
+                            <td>{{activity?.year}}</td>
+                            <td>{{activity?.activityId}}</td>
+                            <td width="150px">{{activity?.activityCode}}</td>
+                            <td>{{activity?.activityName}}</td>
+                            <td>{{activity?.activityDescription}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header bg-info text-white">Expense found</div>
+            <div class="card-block" style="height:100%">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>AWP</th>
+                            <th>Expense Id </th>
+                            <th>Expense name</th>
+                            <th>Expense type</th>
+                            <th>Activity code</th>
+                            <th>Activity name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let expense of expenseList" style="cursor:pointer" [routerLink]="['/expenseDetail', expense.activityId, expense.expenseId]">
+                            <td>{{expense.year}}</td>
+                            <td>{{expense?.expenseId}}</td>
+                            <td>{{expense?.expenseName}}</td>
+                            <td>{{expense?.expenseType.expenseTypeName}}</td>
+                            <td width="150px">{{expense?.activityCode}}</td>
+                            <td>{{expense?.activityName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

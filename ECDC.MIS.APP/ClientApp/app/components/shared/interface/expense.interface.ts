@@ -1,5 +1,7 @@
 export interface Expense {
-    expenseId?:number;
+    expenseId?: number;
+    sectionId?: number;
+    budgetLineId?: number;
     expenseIdName:string;
     expenseName?: string;
     activityCode?: string;
@@ -8,7 +10,12 @@ export interface Expense {
     startDate?: Date;
     endDate?: Date;
     unitId?:number;
-    dpId?:number;
+    dpId?: number;
+    projectManagerId?: number;
+    authOfficerId?: number;
+    procOfficerId?: number;
+    procTypeId?: number;
+    procStatusId?: number;
 
     [key: number]: string;
 }

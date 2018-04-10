@@ -74,6 +74,7 @@ export class HomeComponent {
     }
 
     getUserFte(): any {
+        this.showLoaded = true;
         let url = this.webServiceUrl + "/ExpenseStaff/GetExpenseSatff/" + this.selectedAwp.value;;
         this.http.get(url, { withCredentials: true }).subscribe(data => {
             this.expenseStaffList = data.json();
