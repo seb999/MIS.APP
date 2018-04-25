@@ -1,20 +1,65 @@
-﻿<h3>Meeting</h3>
+﻿<div class="row">
+    <div class="text-left">
+        <h3>Meeting</h3>
+    </div>
+    <div class="text-left" style="margin-left:20px;margin-top:7px;padding-bottom:0px">
+        <span *ngIf="!meetingList"><em>Loading...</em></span>
+    </div>
+</div>
 
 <div *ngIf="showLoaded" class="overlay"></div>
 <div *ngIf="showLoaded" id="loaderModernize"></div>
 
 <!--Button clear filters-->
 <div style="margin-bottom:10px;float:left;">
-    <button type="button" class="btn btn-labeled btn-info" (click)="clearFilters()">
-        <span class="btn-label"><i class="glyphicon glyphicon-repeat"></i></span> Clear filter
+    <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()">
+        <span class="btn-label"><i class="fas fa-sync-alt"></i></span> Clear filter
+    </button>
+
+    <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="exportToCsv()">
+        <span class="btn-label"><i class="fas fa-share-square"></i> Excel</span>
+        <ngb-progressbar type="warning" [value]="progress" [hidden]="progress<1" height=".2rem" [striped]="true"></ngb-progressbar>
     </button>
 </div>
 
 <!--Year filter-->
 <div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Year&nbsp;</div>
 <div class="dropdown" style="float:left;">
-    <select class="mySelect form-control input-sm " [(ngModel)]="selectedAwp" (ngModelChange)="loadLookupList()">
+    <select class="mySelect form-control form-control-sm" [(ngModel)]="selectedAwp" (ngModelChange)="loadLookupList()">
         <option *ngFor="let awp of awpList" [ngValue]="awp"> {{awp.text}} </option>
+    </select>
+</div>
+
+<!--Months-->
+<div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Month&nbsp;</div>
+<div class="dropdown" style="float:left;">
+    <select class="form-control form-control-sm" [(ngModel)]="filter.meetingStartMonth" required>
+        <option *ngFor="let item of monthList" [ngValue]="item.value">{{item.text}}</option>
+    </select>
+</div>
+
+<!--Unit-->
+<div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Unit&nbsp;</div>
+<div class="dropdown" style="float:left;">
+    <select class="form-control form-control-sm" [(ngModel)]="selectedUnit" (change)="unitChanged()" required>
+        <option *ngFor="let item of unitList" [ngValue]="item">{{item.text}}</option>
+    </select>
+</div>
+
+<!--DP-->
+<div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">DP&nbsp;</div>
+<div class="dropdown" style="float:left;">
+    <select class="form-control form-control-sm" [(ngModel)]="filter.dpId" required>
+        <option *ngFor="let item of dpList" [ngValue]="item.value">{{item.text}}</option>
+    </select>
+</div>
+
+<!--Section-->
+<div class="dropdown" style="float:left;margin-top:7px; margin-left:7px">Section&nbsp;</div>
+<div class="dropdown" style="float:left;">
+    <select class="form-control form-control-sm" [(ngModel)]="filter.sectionId">
+        <option *ngFor="let item of sectionList" [ngValue]="item.value">{{item.text}}</option>
+        {{item}}
     </select>
 </div>
 
@@ -24,47 +69,47 @@
             <th></th>
             <th>
                 Id
-               
+
             </th>
             <th>
                 Code
-             
+
             </th>
             <th>
                 Expense name
-           
+
             </th>
             <th>
                 BL
-              
+
             </th>
             <th>
                 Organiser
-                
+
             </th>
             <th>
                 Location
-                
+
             </th>
             <th>
                 Start date
-                
+
             </th>
             <th>
                 Initiation deadline
-               
+
             </th>
             <th>
                 Amount
-               
+
             </th>
             <th>
                 Committed
-              
+
             </th>
             <th>
                 Status
-                
+
             </th>
             <th>
                 Change requested
@@ -72,74 +117,79 @@
         </tr>
     </thead>
 
-    <!--<tbody class="avoid-sort">
+    <tbody class="avoid-sort">
         <tr class="trFilter">
             <td></td>
             <td></td>
             <td></td>
-            <td class="col-md-2">
-                @*Autocomplete*@
-                <input type="text" ng-model="f.ExpenseName" placeholder="Expense name..." uib-typeahead="meeting.ExpenseName for meeting in meetingList| filter:{ExpenseName:$viewValue} " class="form-control input-sm" typeahead-show-hint="true" typeahead-min-length="2" ng-keyup="$event.keyCode == 13 && filterTable();" />
+            <td>
+              
             </td>
-            <td class="col-md-1"><select class="mySelect form-control input-sm " ng-model="selectedBudgetLine" ng-options="p.Text for p in budgetLineList| filter: budgetLineComparator" ng-change="filterTable()"></select></td>
-            <td class="col-md-1"><select class="mySelect form-control input-sm " ng-model="selectedOrganiser" ng-options="p.Text for p in organiserList" ng-change="filterTable()"></select></td>
+            <td>
+                <select class="form-control form-control-sm" [(ngModel)]="filter.budgetLineId" style="max-width:300px">
+                    <option *ngFor="let item of budgetLineList" [ngValue]="item.value">{{item.text}}</option>
+                </select>
+            </td>
+            <td>
+                <select class="form-control form-control-sm" [(ngModel)]="filter.ownerId">
+                    <option *ngFor="let item of organiserList" [ngValue]="item.value">{{item.text}}</option>
+                </select>
+            </td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td class="col-md-1"><select class="mySelect form-control input-sm " ng-model="selectedMeetingStatus" ng-options="p.Text for p in meetingStatusList" ng-change="multiStatusFilter()"></select></td>
-            <td class="col-md-1"></td>
+            <td>
+                <select class="form-control form-control-sm" [(ngModel)]="filter.meetingStatusId">
+                    <option *ngFor="let item of statusList" [ngValue]="item.value">{{item.text}}</option>
+                </select>
+            </td>
+            <td></td>
         </tr>
-    </tbody>-->
+    </tbody>
 
     <tbody>
 
-        <tr  *ngFor="let meeting of meetingList | activityFilter : filter"  style="cursor:pointer">
+        <tr *ngFor="let meeting of meetingList | expenseFilter : filter" style="cursor:pointer" [routerLink]="['/meetingDetail', meeting.expenseId]" (click)="saveFilters();">
             <td style="min-width:55px">
-                <button tooltip-placement="right" type="button" *ngIf="!meeting.expanded" (click)="meeting.expanded = true" class="btn btn-labeled btn-default btn-xs" style="width:22px">
-                    <!--<span class="btn-label">{{meeting.subMeetingList.length}}+ </span>-->
-                </button>
-                <button type="button" ng-if="meeting.expanded" (click)="meeting.expanded = false" class="btn btn-labeled btn-default btn-xs" style="width:22px">
-                    <span class="btn-label">-</span>
-                </button>
                 <img src={{meeting.statusIcon}} style="cursor:pointer;" />
             </td>
             <td>
                 {{meeting.expenseId}}
             </td>
-            <td >
+            <td>
                 {{meeting.meetingCode}}
             </td>
-            <td class="col-md-2" >
+            <td>
                 {{meeting.expenseName}}
             </td>
-            <td class="col-md-1" >
+            <td>
                 {{meeting.budgetLineCode}}
             </td>
-            <td class="col-md-1">
-                <a href="{{meeting.organiserEmail}}" class="btn-label" style="color:dimgrey"><i class="glyphicon glyphicon-envelope" style="cursor:pointer"></i></a>
+            <td>
+                <a href="{{meeting.organiserEmail}}" class="btn-label" style="color:dimgrey"><i class="fas fa-envelope"></i></a>
                 {{meeting.organiser}}
             </td>
-            <td class="col-md-1" >
+            <td>
                 {{meeting.meetingLocation}}
             </td>
-            <td class="col-md-1" >
+            <td>
                 {{meeting.meetingStartDate| date :'dd/MM/yyyy'}}
             </td>
-            <td class="col-md-1" >
+            <td>
                 {{meeting.meetingInitiationDate| date :'dd/MM/yyyy'}}
             </td>
-            <td class="col-md-1" >
+            <td>
                 {{meeting.amount}}
             </td>
-            <td class="col-md-1" >
+            <td>
                 {{meeting.amountCommitted}}
             </td>
-            <td class="col-md-1" >
+            <td>
                 {{meeting.statusName}}
             </td>
-            <td class="col-md-1" >
+            <td (click)="onEvent($event)">
                 <span ng-hide="meeting.approvalStatusName ==''"
                       ng-class="{hoSApproval:meeting.ApprovalStatusName=='Wait head of section approval', smtApproval:meeting.ApprovalStatusName=='Wait SMT approval', hoUApproval:meeting.ApprovalStatusName=='Wait head of unit approval'}">
                     <i class="glyphicon glyphicon-flag"></i>{{meeting.approvalStatusName}}
@@ -147,6 +197,6 @@
             </td>
         </tr>
 
-      
+
     </tbody>
 </table>

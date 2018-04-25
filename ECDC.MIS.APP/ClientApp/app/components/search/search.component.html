@@ -1,10 +1,15 @@
-<h3>Search</h3>
-
-<div class="alert alert-danger small col-3" role="alert" style="float:right; height:30px;padding:4px; padding-left:15px;" *ngIf="messageContent">{{messageContent}}</div>
-
+<div class="row">
+    <div class="text-left">
+        <h3>Search</h3>
+    </div>
+    <div class="text-left" style="margin-left:20px;margin-top:7px;padding-bottom:0px">
+        <span *ngIf="!activityList"><em>Loading...</em></span>
+    </div>
+</div>
 <div *ngIf="showLoaded" class="overlay"></div>
 <div *ngIf="showLoaded" id="loaderModernize"></div>
-<p *ngIf="!activityList"><em>Loading...</em></p>
+
+<div class="alert alert-danger small col-3" role="alert" style="float:right; height:30px;padding:4px; padding-left:15px;" *ngIf="messageContent">{{messageContent}}</div>
 
 <form class="form-inline my-1 my-lg-0">
     <input class="form-control form-control-sm mr-sm-1" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchString" name="first">

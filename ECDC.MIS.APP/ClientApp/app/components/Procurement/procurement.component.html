@@ -1,11 +1,18 @@
 ﻿<!--example of redirection to Old MIS page-->
 <!--<iframe style="position: absolute; z-index:99; height: 83%; width: 99%; border:none;margin:0px" [src]='sanitizer.bypassSecurityTrustResourceUrl(mis4HostUrl)'></iframe>-->
 
-<h3>Procurement</h3>
+<div class="row">
+    <div class="text-left">
+        <h3>Procurement</h3>
+    </div>
+    <div class="text-left" style="margin-left:20px;margin-top:7px;padding-bottom:0px">
+        <span *ngIf="!procurementList"><em>Loading...</em></span>
+    </div>
+</div>
 
 <div *ngIf="showLoaded" class="overlay"></div>
 <div *ngIf="showLoaded" id="loaderModernize"></div>
-<p *ngIf="!procurementList"><em>Loading...</em></p>
+
 
 <!--Button clear filters-->
 <div style="margin-bottom:10px;float:left;">
@@ -14,7 +21,7 @@
     </button>
 
     <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="exportToCsv()">
-        <span class="btn-label"><i class="fas fa-file-excel"></i> Export to Excel</span>
+        <span class="btn-label"><i class="fas fa-share-square"></i> Excel</span>
         <ngb-progressbar type="warning" [value]="progress" [hidden]="progress<1" height=".2rem" [striped]="true"></ngb-progressbar>
     </button>
 </div>

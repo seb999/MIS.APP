@@ -1,8 +1,13 @@
-<h3>Expense detail</h3>
-
-<div *ngIf="showLoadedactivity" class="overlay"></div>
+<div class="row">
+    <div class="text-left">
+        <h3>Expense detail</h3>
+    </div>
+    <div class="text-left" style="margin-left:20px;margin-top:7px;padding-bottom:0px">
+        <span *ngIf="!selectedExpense"><em>Loading...</em></span>
+    </div>
+</div>
+<div *ngIf="showLoaded" class="overlay"></div>
 <div *ngIf="showLoaded" id="loaderModernize"></div>
-<p *ngIf="!selectedExpense"><em>Loading...</em></p>
 
 <!-- <div style="margin-bottom:10px;float:left;">
     <button type="button" class="btn btn-labeled btn-info" (click)="clearFilters()">
@@ -12,15 +17,15 @@
 <!--Buttons-->
 <div style="margin-bottom:10px;float:left;">
     <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()" data-toggle="modal" data-target="#editExpenseModal">
-        <span class="btn-label"><i class="glyphicon glyphicon-repeat"></i></span> Edit
+        <span class="btn-label"><i class="far fa-edit"></i></span> Edit
     </button>
 
-    <button type="button" class="btn btn-labeled btn-warning btn-sm" (click)="previous()" [disabled]="disablePrevious">
-        <<
+    <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="previous()" [disabled]="disablePrevious">
+        <i class="fas fa-angle-double-left"></i>
     </button>
 
-    <button type="button" class="btn btn-warning btn-sm" (click)="next()" [disabled]="disableNext">
-        >>
+    <button type="button" class="btn btn-info btn-sm" (click)="next()" [disabled]="disableNext">
+        <i class="fas fa-angle-double-right"></i>
     </button>
 </div>
 
@@ -29,7 +34,7 @@
 
 <div class="row">
     <div class="col-6">
-        <div class="card ">
+        <div class="card " style="margin-bottom:15px">
             <div class="card-header bg-info text-white">
                 Summary
             </div>
@@ -38,38 +43,38 @@
                 <ul class="list-group" style="padding:0px">
                     <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
                         <p class="label">Expense Id</p>
-                        <p class="labelC">{{selectedExpense?.expenseId}}</p>
+                        <p class="labelC">{{selectedExpense?.expenseId}}&nbsp;</p>
                     </li>
                     <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
                         <p class="label">Expense Type</p>
-                        <p class="labelC">{{selectedExpense?.expenseTypeName}}</p>
+                        <p class="labelC">{{selectedExpense?.expenseTypeName}}&nbsp;</p>
                     </li>
                     <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
                         <p class="label">Expense Name</p>
-                        <p class="labelC">{{selectedExpense?.expenseName}}</p>
+                        <p class="labelC">{{selectedExpense?.expenseName}}&nbsp;</p>
                     </li>
                     <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
                         <p class="label">Budget line</p>
-                        <p class="labelC">{{selectedExpense?.budgetLineName}}</p>
+                        <p class="labelC">{{selectedExpense?.budgetLineName}}&nbsp;</p>
                     </li>
                     <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
                         <div style="float:left">
                             <p class="label">Organiser</p>
-                            <p class="labelC">{{selectedExpense?.organiser}}</p>
+                            <p class="labelC">{{selectedExpense?.organiser}}&nbsp;</p>
                         </div>
                         <div style="float:right">
-                            <div class="mx-auto"><img src="data:image/JPEG;base64,{{selectedExpense?.organiserPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" /></div>
+                            <div class="mx-auto"><img *ngIf="selectedExpense?.organiserPicture" src="data:image/JPEG;base64,{{selectedExpense?.organiserPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" /></div>
                         </div>
                     </li>
                     <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
                         <div class="row">
                             <div class="col-3">
                                 <p class="label">Start date</p>
-                                <p class="labelC">{{selectedExpense?.startDate| date: 'dd/MM/yyyy'}}</p>
+                                <p class="labelC">{{selectedExpense?.startDate| date: 'dd/MM/yyyy'}}&nbsp;</p>
                             </div>
                             <div class="col-5">
                                 <p class="label">End date</p>
-                                <p class="labelC">{{selectedExpense?.endDate| date: 'dd/MM/yyyy'}}</p>
+                                <p class="labelC">{{selectedExpense?.endDate| date: 'dd/MM/yyyy'}}&nbsp;</p>
                             </div>
                         </div>
                     </li>
@@ -77,11 +82,11 @@
                         <div class="row">
                             <div class="col-3">
                                 <p class="label">Initial amount</p>
-                                <p class="labelC">{{selectedExpense?.initialAmount}}</p>
+                                <p class="labelC">{{selectedExpense?.initialAmount}}&nbsp;</p>
                             </div>
                             <div class="col-5">
                                 <p class="label">Amount</p>
-                                <p class="labelC">{{userProfile?.amount}}</p>
+                                <p class="labelC">{{userProfile?.amount}}&nbsp;</p>
                             </div>
                         </div>
                     </li>
@@ -89,51 +94,125 @@
                         <div class="row">
                             <div class="col-3">
                                 <p class="label">Committed</p>
-                                <p class="labelC">{{selectedExpense?.amountCommitted}}</p>
+                                <p class="labelC">{{selectedExpense?.amountCommitted}}&nbsp;</p>
                             </div>
                             <div class="col-5">
                                 <p class="label">Paid</p>
-                                <p class="labelC">{{userProfile?.amountPaid}}</p>
+                                <p class="labelC">{{userProfile?.amountPaid}}&nbsp;</p>
                             </div>
                         </div>
                     </li>
                     <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
                         <p class="label">Authorising officer</p>
-                        <p class="labelC">{{selectedExpense?.AuthorisingOfficer}}</p>
+                        <p class="labelC">{{selectedExpense?.AuthorisingOfficer}}&nbsp;</p>
                     </li>
                 </ul>
             </div>
         </div>
-        <br>
-        <div class="card ">
+
+        <div class="card " style="margin-bottom:15px">
             <div class="card-header bg-info text-white">
                 Deliverables
             </div>
             <div class="card-block">
-
+                <div class="alert alert-warning" role="alert" style="margin-bottom:0px;height:25px;padding-top:0px">
+                    <p class="label">No data</p>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="col-6">
-        <div class="card ">
+        <div class="card " style="margin-bottom:15px">
+            <div class="card-header bg-info text-white">
+                Summary other
+            </div>
+            <div class="card-block">
+                <ul class="list-group" style="padding:0px">
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Business continuity</p>
+                        <p class="labelC">{{selectedExpense?.capacityLevelName}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Recurrence</p>
+                        <p class="labelC">{{selectedExpense?.recurrenceName}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Priority</p>
+                        <p class="labelC">{{selectedExpense?.procType}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">SPD key objective</p>
+                        <p class="labelC">{{selectedExpense?.spdObjectiveName}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">SPD key output</p>
+                        <p class="labelC">{{selectedExpense?.spdKeyOutputName}}&nbsp;</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card " style="margin-bottom:15px">
             <div class="card-header bg-info text-white">
                 Procurement
             </div>
             <div class="card-block">
+                <div *ngIf="selectedExpense?.expenseTypeName !== 'Procurement'" class="alert alert-warning" role="alert" style="margin-bottom:0px;height:25px;padding-top:0px">
+                    <p class="label">No data</p>
+                </div>
+
+                <ul class="list-group" style="padding:0px" *ngIf="selectedExpense?.expenseTypeName === 'Procurement'">
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Procurement type</p>
+                        <p class="labelC">{{selectedExpense?.procType}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Contract type</p>
+                        <p class="labelC">{{selectedExpense?.procContractType}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Procurement officer</p>
+                        <p class="labelC">{{selectedExpense?.procOfficerName}}&nbsp;</p>
+                    </li>
+                </ul>
 
             </div>
         </div>
-        <br>
-        <div class="card ">
+
+        <div class="card " style="margin-bottom:15px">
             <div class="card-header bg-info text-white">
                 Meeting
             </div>
             <div class="card-block">
-
+                <div *ngIf="selectedExpense?.expenseTypeName !== 'Meeting'" class="alert alert-warning" role="alert" style="margin-bottom:0px;height:25px;padding-top:0px">
+                    <p class="label">No data</p>
+                </div>
+                <ul class="list-group" style="padding:0px" *ngIf="selectedExpense?.expenseTypeName === 'Meeting'">
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Duration</p>
+                        <p class="labelC">{{selectedExpense?.meetingDuration}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Internal participants</p>
+                        <p class="labelC">{{selectedExpense?.MeetingNumIntParticipants}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">External participants</p>
+                        <p class="labelC">{{selectedExpense?.MeetingNumExtParticipants}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Location</p>
+                        <p class="labelC">{{selectedExpense?.MeetingLocation}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">City</p>
+                        <p class="labelC">{{selectedExpense?.MeetingLocationCity}}&nbsp;</p>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 
-    </div>
-   
+</div>
+

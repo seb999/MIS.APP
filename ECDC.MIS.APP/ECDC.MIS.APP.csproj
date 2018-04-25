@@ -29,6 +29,7 @@
     <None Remove="ClientApp\app\components\images\icon_smiley_notstarted.png" />
     <None Remove="ClientApp\app\components\images\icon_smiley_progress.png" />
     <None Remove="ClientApp\app\components\images\icon_smiley_rescheduled.png" />
+    <None Remove="ClientApp\app\components\meetingDetail\meetingDetail.component.ts" />
     <None Remove="ClientApp\app\components\meeting\meeting.component.ts" />
     <None Remove="ClientApp\app\components\Procurement\procurement.component.ts" />
   </ItemGroup>
@@ -58,6 +59,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\meetingDetail\meetingDetail.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\meeting\meeting.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\Procurement\procurement.component.ts" />
   </ItemGroup>

@@ -1,18 +1,18 @@
 ﻿import { Component, OnInit, Inject} from '@angular/core';
 import { Http } from '@angular/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LookupListItem } from '../shared/lookupListItem';
 import { ColumnSortedEvent } from '../sortableTable/sort.service';
 import { Expense } from '../shared/interface/expense.interface';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 
 @Component({
-    selector: 'meeting',
-    templateUrl: './meeting.component.html'
+    selector: 'meetingDetail',
+    templateUrl: './meetingDetail.component.html'
 })
 
-export class MeetingComponent {
-    public meetingList: Expense[];
+export class MeetingDetailComponent {
+    public expense: any;
     public awpList: LookupListItem[];
     public unitList: LookupListItem[];
     public dpList: LookupListItem[];
@@ -23,6 +23,8 @@ export class MeetingComponent {
     public statusList: LookupListItem[] = [] as any;
     public monthList: any[] = [] as any;
 
+    public expenseId: number;
+
     public selectedAwp: any;
     public selectedUnit: any;
 
@@ -31,12 +33,14 @@ export class MeetingComponent {
     public progress: string = "0";
     public filter: Expense = {} as any;
 
-    constructor(public http: Http, private router: Router, @Inject('WEB_SERVICE_URL') apiUrl: string) {
+    constructor(public http: Http, private router: Router, @Inject('WEB_SERVICE_URL') apiUrl: string, private route: ActivatedRoute) {
         this.webServiceUrl = apiUrl;
         this.showLoaded = true;
     }
 
     ngOnInit() {
+        this.route.params.subscribe(params => { this.expenseId = +params['expenseId']; });
+
         this.loadLookupList();
     }
 
@@ -63,42 +67,22 @@ export class MeetingComponent {
                 }
             }
 
-            this.unitList = data.json().unitList;
-            this.dpList = data.json().dpList;
-            this.sectionList = data.json().sectionList;
-            this.sectionListInitial = data.json().sectionList;
-            this.budgetLineList = data.json().budgetLineList;
-            this.budgetLineList = this.budgetLineList.filter(p => p.extraData === this.selectedAwp.extraData || p.extraData === "");
             this.organiserList = data.json().userList;
             this.statusList = data.json().meetingStatusList;
-            this.monthList = [
-                { text: '--', value: "" },
-                { text: 'Janaury', value: '01' },
-                { text: 'February', value: '02' },
-                { text: 'March', value: '03' },
-                { text: 'April', value: '04' },
-                { text: 'May', value: '05' },
-                { text: 'June', value: '06' },
-                { text: 'Jully', value: '07' },
-                { text: 'August', value: '08' },
-                { text: 'September', value: '09' },
-                { text: 'October', value: '10' },
-                { text: 'November', value: '11' },
-                { text: 'December', value: '12' },
-            ];
+         
 
-            this.initFilters();
+           // this.initFilters();
             this.loadMeeting();
-            this.retrieveFilters();
+            //this.retrieveFilters();
 
         }, err => null);
     };
 
     loadMeeting() {
         this.showLoaded = true;
-        let url = this.webServiceUrl + "/meeting/" + this.selectedAwp.value;
+        let url = this.webServiceUrl + "/meeting/Id/" + this.expenseId;
         this.http.get(url, { withCredentials: true }).subscribe(data => {
-            this.meetingList = data.json();
+            this.expense = data.json();
             this.showLoaded = false;
         }, err => null);
     }

@@ -1,13 +1,18 @@
-<h3>Activity detail</h3>
-
-<div *ngIf="showLoadedactivity" class="overlay"></div>
+<div class="row">
+    <div class="text-left">
+        <h3>Activity detail</h3>
+    </div>
+    <div class="text-left" style="margin-left:20px;margin-top:7px;padding-bottom:0px">
+        <span *ngIf="!activity"><em>Loading...</em></span>
+    </div>
+</div>
+<div *ngIf="showLoaded" class="overlay"></div>
 <div *ngIf="showLoaded" id="loaderModernize"></div>
-<p *ngIf="!activity"><em>Loading...</em></p>
 
 <ngb-tabset #tabs="ngbTabset">
 
     <ngb-tab id="summary" title="Summary">
-        <ng-template ngbTabContent >
+        <ng-template ngbTabContent>
             <div class="row" style="margin-top:20px">
                 <div class="col-6">
                     <div class="card">
@@ -29,7 +34,7 @@
                                         </li>
                                         <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
                                             <p class="label">Status</p>
-                                            <p class="labelC">{{activity?.statusName}}</p>
+                                            <p class="labelC"><img *ngIf="activity?.statusIcon" [attr.src]="activity?.statusIcon" /> {{activity?.statusName}} </p>
                                         </li>
                                     </ul>
                                 </div>
@@ -72,7 +77,7 @@
                                         <p class="labelC">{{activity?.activityLeader}}</p>
                                     </div>
                                     <div style="float:right">
-                                        <div class="mx-auto" *ngIf="activity"><img src="data:image/JPEG;base64,{{activity?.activityLeaderPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" /></div>
+                                        <div class="mx-auto" *ngIf="activity?.activityLeaderPicture"><img src="data:image/JPEG;base64,{{activity?.activityLeaderPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" /></div>
                                     </div>
                                 </li>
                                 <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
@@ -120,55 +125,55 @@
                         <!--<div class="card-block">-->
 
 
-                            <ul class="list-group" style="padding:0px">
-                                <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px" *ngFor="let expense of activity?.expenseList">
+                        <ul class="list-group" style="padding:0px">
+                            <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px" *ngFor="let expense of activity?.expenseList">
 
-                                    <h6 class="m-2">Expense {{expense?.expenseId}} - {{expense?.expenseName}}</h6>
+                                <h6 class="m-2">Expense {{expense?.expenseId}} - {{expense?.expenseName}}</h6>
 
-                                    <div class="card" *ngFor="let expenseStaff of expense?.expenseStaffList" style="margin-bottom:15px">
+                                <div class="card" *ngFor="let expenseStaff of expense?.expenseStaffList" style="margin-bottom:15px">
 
-                                        <div class="card bg-light" >
-                                            <div class="card-header" style="padding:5px;background-color:rgb(182, 205, 221);">
-                                                <div class="row">
-                                                    <div class="col-1">
-                                                        <img src="data:image/JPEG;base64,{{expenseStaff?.staffPicture}}" height="50" class="img-rounded" />
-                                                    </div>
-                                                    <div class="col-11">
-                                                        <a [routerLink]="['/fte', expenseStaff?.staffName]" href="#" style="color:blue; font-style:italic">
-                                                            <u> {{expenseStaff?.staffName}}</u>
-                                                        </a>
-                                                    </div>
+                                    <div class="card bg-light">
+                                        <div class="card-header" style="padding:5px;background-color:rgb(182, 205, 221);">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    <img src="data:image/JPEG;base64,{{expenseStaff?.staffPicture}}" height="50" class="img-rounded" />
                                                 </div>
-
+                                                <div class="col-11">
+                                                    <a [routerLink]="['/fte', expenseStaff?.staffName]" href="#" style="color:blue; font-style:italic">
+                                                        <u> {{expenseStaff?.staffName}}</u>
+                                                    </a>
+                                                </div>
                                             </div>
 
-                                            <div class="card-body" style="padding:5px;">
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <p class="label">Planned days</p>
-                                                        <p class="labelC">{{expenseStaff?.planDay}}</p>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <p class="label">Planned FTEs</p>
-                                                        <p class="labelC">{{expenseStaff?.planFte}}</p>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <p class="label">Days actual</p>
-                                                        <p class="labelC" *ngIf="displayFte || currentUser?.userId == expenseStaff?.staffId">{{expenseStaff?.actualDay}}</p>
-                                                        <p class="labelC" *ngIf="displayFte || currentUser?.userId == expenseStaff?.staffId">{{expenseStaff?.actualFte}}</p>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <p class="label">FTEs actual</p>
-                                                        <p class="labelC" *ngIf="!displayFte && currentUser?.userId != expenseStaff?.staffId"><i style="color:red" class="glyphicon glyphicon-ban-circle"></i></p>
-                                                        <p class="labelC" *ngIf="!displayFte && currentUser?.UserId != expenseStaff?.staffId"><i style="color:red" class="glyphicon glyphicon-ban-circle"></i></p>
-                                                    </div>
+                                        </div>
+
+                                        <div class="card-body" style="padding:5px;">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <p class="label">Planned days</p>
+                                                    <p class="labelC">{{expenseStaff?.planDay}}</p>
+                                                </div>
+                                                <div class="col-3">
+                                                    <p class="label">Planned FTEs</p>
+                                                    <p class="labelC">{{expenseStaff?.planFte}}</p>
+                                                </div>
+                                                <div class="col-3">
+                                                    <p class="label">Days actual</p>
+                                                    <p class="labelC" *ngIf="displayFte || currentUser?.userId == expenseStaff?.staffId">{{expenseStaff?.actualDay}}</p>
+                                                    <p class="labelC" *ngIf="displayFte || currentUser?.userId == expenseStaff?.staffId">{{expenseStaff?.actualFte}}</p>
+                                                </div>
+                                                <div class="col-3">
+                                                    <p class="label">FTEs actual</p>
+                                                    <p class="labelC" *ngIf="!displayFte && currentUser?.userId != expenseStaff?.staffId"><i style="color:red" class="glyphicon glyphicon-ban-circle"></i></p>
+                                                    <p class="labelC" *ngIf="!displayFte && currentUser?.UserId != expenseStaff?.staffId"><i style="color:red" class="glyphicon glyphicon-ban-circle"></i></p>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-                                </li>
-                            </ul>
+
+                                </div>
+                            </li>
+                        </ul>
                         <!--</div>-->
                     </div>
                 </div>
@@ -183,7 +188,7 @@
 
             <br />
             <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="exportExpenseToCsv()" [disabled]="!activity">
-                <span class="btn-label"><i class="fas fa-file-excel"></i> Export to Excel</span>
+                <span class="btn-label"><i class="fas fa-share-square"></i> Excel</span>
                 <ngb-progressbar type="warning" [value]="progress1" [hidden]="progress1<1" height=".2rem" [striped]="true"></ngb-progressbar>
             </button>
 
@@ -206,7 +211,19 @@
                                     Budget line
                                 </th>
                                 <th>
-                                    Amount
+                                    Start date
+                                </th>
+                                <th>
+                                    End date
+                                </th>
+                                <th>
+                                    Allocated
+                                </th>
+                                <th>
+                                    Committed
+                                </th>
+                                <th>
+                                    Paid
                                 </th>
                             </tr>
                         </thead>
@@ -226,7 +243,19 @@
                                     {{expense.budgetLineName}}
                                 </td>
                                 <td>
+                                    {{expense.startDate | date :'dd/MM/yyyy' }}
+                                </td>
+                                <td>
+                                    {{expense.endDate| date :'dd/MM/yyyy'}}
+                                </td>
+                                <td>
                                     {{expense.amount}}
+                                </td>
+                                <td>
+                                    {{expense.committed}}
+                                </td>
+                                <td>
+                                    {{expense.paid}}
                                 </td>
                             </tr>
                         </tbody>
@@ -234,18 +263,17 @@
                 </div>
             </div>
             <br />
-            <br />
             <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="exportBudgetTransferToCsv()" [disabled]="!budgetTransferSummary">
-                <span class="btn-label"><i class="fas fa-file-excel"></i> Export to Excel</span>
+                <span class="btn-label"><i class="fas fa-share-square"></i> Excel</span>
                 <ngb-progressbar type="warning" [value]="progress2" [hidden]="progress2<1" height=".2rem" [striped]="true"></ngb-progressbar>
             </button>
 
-            <div class="card"  style="margin-top:20px;">
+            <div class="card" style="margin-top:20px;">
                 <div class="card-header bg-info text-white">Budget transfer summary</div>
                 <div class="card-block">
-                    <table class="table table-striped table-bordered table-hover table-sm" sortable-table (sorted)="onSorted($event)" style="margin-bottom:0px">
+                    <table class="table table-striped table-bordered table-sm" sortable-table (sorted)="onSorted($event)" style="margin-bottom:0px">
                         <thead>
-                            <tr >
+                            <tr>
                                 <th class="w-10">
                                     Expense Id
                                 </th>
@@ -264,12 +292,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let expense of budgetTransferSummary" style="cursor:pointer" >
+                            <tr *ngFor="let expense of budgetTransferSummary" >
                                 <!-- [routerLink]="['/expenseDetail', activity.activityId, expense.expenseId]" -->
                                 <td>
                                     {{expense.expenseId}}
                                 </td>
-                                <td >
+                                <td>
                                     {{expense.expenseName}}
                                 </td>
                                 <td>
@@ -279,7 +307,7 @@
                                     {{expense.amount}}
                                 </td>
                                 <td>
-                                    <table class="table table-striped table-bordered table-hover table-sm" sortable-table (sorted)="onSorted($event)" style="margin-bottom:0px">
+                                    <table class="table table-striped table-bordered table-sm" sortable-table (sorted)="onSorted($event)" style="margin-bottom:0px">
                                         <thead>
                                             <tr>
                                                 <th class="w-10">
@@ -297,10 +325,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let bt of expense.budgetTransferList" style="cursor:pointer" [routerLink]="['/budgetTransfer']">
+                                            <tr *ngFor="let bt of expense.budgetTransferList" >
                                                 <!--  -->
-                                                <td class="w-10">
-                                                    {{bt.petId}}
+                                                <td class="w-10" style="color:blue; font-style:italic;cursor:pointer" [routerLink]="['/budgetTransferDetail', bt.petId]" >
+                                                    <u>{{bt.petId}}</u>
                                                 </td>
                                                 <td class="w-10" *ngIf="bt.sourceExpenseId == expense.expenseId">
                                                     <i style="color:orangered" class="fas fa-minus"></i> {{bt.amount}}
@@ -330,8 +358,14 @@
 
     <ngb-tab id="monitoring" title="Monitoring">
         <ng-template ngbTabContent>
-            <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="monitorActivity()" style="margin-top:10px">
-                <span class="btn-label"><i class="fas fa-sync-alt"></i></span> Monitor activity
+            <button *ngIf="!monitorEditMode" type="button" class="btn btn-labeled btn-info btn-sm" (click)="monitorActivity()" style="margin-top:10px">
+                <span class="btn-label"><i class="far fa-edit"></i></span> Monitor
+            </button>
+            <button *ngIf="monitorEditMode" type="button" class="btn btn-labeled btn-info btn-sm" (click)="saveMonitorData()" style="margin-top:10px">
+                <span class="btn-label"><i class="fas fa-save"></i></span> Save
+            </button>
+            <button *ngIf="monitorEditMode" type="button" class="btn btn-labeled btn-info btn-sm" (click)="monitorEditMode = false" style="margin-top:10px">
+                <span class="btn-label"><i class="fas fa-undo-alt"></i></span> Cancel
             </button>
 
             <div class="row" style="margin-top:10px">
@@ -346,12 +380,12 @@
                             <ul class="list-group" style="padding:0px">
                                 <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
                                     <p class="label">Last monitored by</p>
-                                    <p class="labelC"> {{monitoringData.LastMonitoredByUserName}} - {{monitoringData.LastMonitorDate}}&nbsp;</p>
+                                    <p class="labelC"> {{monitoringData?.lastMonitoredByUserName}} - {{monitoringData?.lastMonitorDate|date :'dd/MM/yyyy' }}&nbsp;</p>
                                 </li>
                                 <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
                                     <p class="label">Status</p>
                                     <p class="labelC" *ngIf="!monitorEditMode">
-                                        {{monitoringData.statusName}}&nbsp;
+                                        {{monitoringData?.statusName}}&nbsp;
                                     </p>
                                     <p class="labelC" *ngIf="monitorEditMode">
                                         <select class="form-control form-control-sm" [(ngModel)]="activity.statusId" required style="max-width:180px">
@@ -363,94 +397,92 @@
                                 <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
                                     <p class="label">Progres note</p>
                                     <p class="labelC" *ngIf="!monitorEditMode">
-                                        {{monitoringData.progressNote}}&nbsp;
+                                        {{monitoringData?.progressNote}}&nbsp;
                                     </p>
                                     <p class="labelC" *ngIf="monitorEditMode">
-                                        jjjj
+                                        <textarea type="text" rows="2" class="form-control input-sm" style="width:100%;" [(ngModel)]="monitoringData.progressNote"></textarea>
                                     </p>
                                 </li>
 
                                 <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
                                     <p class="label">Reason for delay</p>
                                     <p class="labelC" *ngIf="!monitorEditMode">
-                                        {{monitoringData.reasonForDelay}}&nbsp;
+                                        {{monitoringData?.reasonForDelay}}&nbsp;
                                     </p>
                                     <p class="labelC" *ngIf="monitorEditMode">
-                                        ffff
+                                        <textarea type="text" rows="2" class="form-control input-sm" style="width:100%;" [(ngModel)]="monitoringData.reasonForDelay"></textarea>
                                     </p>
                                 </li>
 
                                 <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
                                     <p class="label">New start date</p>
                                     <p class="labelC" *ngIf="!monitorEditMode">
-                                        {{monitoringData.reasonForDelay}}&nbsp;
+                                        {{monitoringData?.newTimeFrame|date :'dd/MM/yyyy'}}&nbsp;
                                     </p>
-                                  
 
-                                        <div class="input-group" *ngIf="monitorEditMode" style="max-width:130px">
-                                            <input class="form-control form-control-sm" placeholder="dd/mm/yyyy"
-                                                   name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary btn-sm" (click)="d.toggle()" type="button">
-                                                    <i class="fa fa-calendar-alt"></i>
-                                                </button>
-                                            </div>
+
+                                    <div class="input-group" *ngIf="monitorEditMode" style="max-width:130px">
+                                        <input class="form-control form-control-sm" placeholder="dd/mm/yyyy"
+                                               name="dp" [(ngModel)]="newTimeFrame" ngbDatepicker #d="ngbDatepicker">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary btn-sm" (click)="d.toggle()" type="button">
+                                                <i class="fa fa-calendar-alt"></i>
+                                            </button>
                                         </div>
+                                    </div>
 
-                                  
+
                                 </li>
 
                                 <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
                                     <p class="label">Immediate actions to be taken</p>
                                     <p class="labelC" *ngIf="!monitorEditMode">
-                                        {{monitoringData.immeadiateAction}}&nbsp;
+                                        {{monitoringData?.immeadiateAction}}&nbsp;
                                     </p>
                                     <p class="labelC" *ngIf="monitorEditMode">
-                                        ffff
+                                        <textarea type="text" rows="2" class="form-control input-sm" style="width:100%;" [(ngModel)]="monitoringData.immeadiateAction"></textarea>
                                     </p>
                                 </li>
 
                             </ul>
 
-                         </div>
-                     </div>
+                        </div>
                     </div>
+                </div>
 
-                            <div class="col-6">
-                                <div class="card">
-                                    <div class="card-header bg-info text-white">
-                                        Monitoring history
-                                    </div>
-
-                                    <div class="card-block">
-                                        <!--<table class="table table-condensed table-bordered table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th class="thLight">Date changed</th>
-                                                <th class="thLight">Change area</th>
-                                                <th class="thLight">New value</th>
-                                                <th class="thLight">Value before change</th>
-                                                <th class="thLight">Changed by</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="item in monitoringData.monitoringHistoryList">
-                                                <td>{{item.ActHistoryDate|date :'dd/MM/yyyy'}}</td>
-                                                <td>{{item.ActHistoryElement}}</td>
-                                                <td>{{item.ActiHistoryNewValue}}</td>
-                                                <td>{{item.ActiHistoryPreviousValue}}</td>
-                                                <td>{{item.UserAdded}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>-->
-                                    </div>
-                                             
-                                </div>
-                                            
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            Monitoring history
                         </div>
 
-            </div>
+                        <div class="card-block">
+                            <table class="table table-condensed table-bordered table-sm" style="margin-bottom:0px">
+                                <thead>
+                                    <tr>
+                                        <th class="thLight">Date changed</th>
+                                        <th class="thLight">Change area</th>
+                                        <th class="thLight">New value</th>
+                                        <th class="thLight">Value before change</th>
+                                        <th class="thLight">Changed by</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of monitoringData?.monitoringHistoryList">
+                                        <td>{{item?.actHistoryDate|date :'dd/MM/yyyy'}}</td>
+                                        <td>{{item?.actHistoryElement}}</td>
+                                        <td>{{item?.actiHistoryNewValue}}</td>
+                                        <td>{{item?.actiHistoryPreviousValue}}</td>
+                                        <td>{{item?.userAdded}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
+                    </div>
+                </div>
+
+            </div>
         </ng-template>
     </ngb-tab>
 </ngb-tabset>

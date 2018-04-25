@@ -1,8 +1,13 @@
-<h3>FTE</h3>
-
+<div class="row">
+    <div class="text-left">
+        <h3>FTE</h3>
+    </div>
+    <div class="text-left" style="margin-left:20px;margin-top:7px;padding-bottom:0px">
+        <span *ngIf="!expenseStaffList"><em>Loading...</em></span>
+    </div>
+</div>
 <div *ngIf="showLoaded" class="overlay"></div>
 <div *ngIf="showLoaded" id="loaderModernize"></div>
-<p *ngIf="!expenseStaffList"><em>Loading...</em></p>
 
 <!--Button clear filters-->
 <div style="margin-bottom:10px;float:left;">
@@ -27,33 +32,33 @@
 
 <div class="row">
     <div class="col-12">
-            <table class='table table-striped table-bordered table-sm' *ngIf="expenseStaffList">
-                    <thead>
-                        <tr >
-                            <th>Staff Id</th>
-                            <th>Staff name</th>
-                            <th>Expense name</th>
-                            <th>Activity name</th>
-                            <th>Plan day</th>
-                            <th>Plan FTE</th>
-                            <th>Actual day</th>
-                            <th>Actual FTE</th>
-                        </tr>
-                    </thead>
-                   
-                    <tbody>
-                        <tr *ngFor="let expenseStaff of expenseStaffList| expenseStaffFilter : filter" (click)="loadExpense(requestExpense.expenseId)">
-                            <td>{{ expenseStaff?.staffId }}</td>
-                            <td>{{ expenseStaff?.staffName }}</td>
-                            <td>{{expenseStaff?.expenseName}}</td>
-                            <td>{{expenseStaff?.activityName}}</td>
-                            <td>{{ expenseStaff?.planDay }}</td>
-                            <td>{{ expenseStaff?.planFte }}</td>
-                            <td>{{ expenseStaff?.actualDay }}</td>
-                            <td>{{ expenseStaff?.actualFte }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <table class='table table-striped table-bordered table-sm' *ngIf="expenseStaffList">
+            <thead>
+                <tr>
+                    <th>Staff Id</th>
+                    <th>Staff name</th>
+                    <th>Expense name</th>
+                    <th>Activity name</th>
+                    <th>Plan day</th>
+                    <th>Plan FTE</th>
+                    <th>Actual day</th>
+                    <th>Actual FTE</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let expenseStaff of expenseStaffList| expenseStaffFilter : filter" (click)="loadExpense(requestExpense.expenseId)">
+                    <td>{{ expenseStaff?.staffId }}</td>
+                    <td>{{ expenseStaff?.staffName }}</td>
+                    <td>{{expenseStaff?.expenseName}}</td>
+                    <td>{{expenseStaff?.activityName}}</td>
+                    <td>{{ expenseStaff?.planDay }}</td>
+                    <td>{{ expenseStaff?.planFte }}</td>
+                    <td>{{ expenseStaff?.actualDay }}</td>
+                    <td>{{ expenseStaff?.actualFte }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
 </div>

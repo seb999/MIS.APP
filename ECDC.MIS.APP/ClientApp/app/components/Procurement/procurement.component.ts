@@ -74,7 +74,6 @@ export class ProcurementComponent {
             this.sectionList = data.json().sectionList;
             this.sectionListInitial = data.json().sectionList;
             this.budgetLineList = data.json().budgetLineList;
-            console.log(this.budgetLineList);
             this.budgetLineList = this.budgetLineList.filter(p => p.extraData === this.selectedAwp.extraData || p.extraData === "");
             this.procTypeList = data.json().procTypeList;
             this.procStatusList = data.json().procStatusList;

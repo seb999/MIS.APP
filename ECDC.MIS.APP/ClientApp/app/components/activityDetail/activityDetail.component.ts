@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LookupListItem } from '../shared/lookupListItem';
 import { Activity } from '../shared/interface/activity.interface';
@@ -16,6 +16,7 @@ export class ActivityDetailComponent {
     public budgetTransferSummary: any;
     public monitoringData : any;
     public monitorEditMode: boolean = false;
+    public newTimeFrame: any;
 
     public activityStatusList: LookupListItem[] = [] as any;
     public filter: Activity = {} as any;
@@ -35,9 +36,7 @@ export class ActivityDetailComponent {
     }
 
     ngOnInit() {
-        this.route.params.subscribe(params => {
-            this.activityId = +params['activityId'];
-        });
+        this.route.params.subscribe(params => {this.activityId = +params['activityId'];});
 
         this.loadLookupList();
         this.loadActivity();
@@ -76,23 +75,50 @@ export class ActivityDetailComponent {
         }, err => null);
     }
 
-    loadMonitoring() {
-        let url = this.webServiceUrl + "/monitoring/activityId/" + this.activityId;
-        this.http.get(url, { withCredentials: true }).subscribe(data => {
-            this.monitoringData = data.json();
-            debugger;
-            this.showLoaded = false;
-        }, err => null);
-    }
-
     redirect(activityId :number,expenseId : number){
         localStorage.setItem('origine', 'budgetTab');
         this.router.navigate(["expenseDetail", activityId, expenseId]);
     };
 
+
+    //--------------Monitoring----------------------
+    loadMonitoring() {
+        let url = this.webServiceUrl + "/monitoring/activityId/" + this.activityId;
+        this.http.get(url, { withCredentials: true }).subscribe(data => {
+            this.monitoringData = data.json();
+            this.showLoaded = false;
+        }, err => null);
+    }
+
     monitorActivity() {
         this.monitorEditMode = true;
     }
+
+    saveMonitorData() {
+       
+        //We do a deepCopy and remove MonitoringHistoryList before posting to server otherwise it crash
+        let deepClassCopy = Object.assign({}, this.monitoringData);
+        deepClassCopy.monitoringHistoryList = null;
+
+        deepClassCopy.newTimeFrame = this.newTimeFrame.day + "/" + this.newTimeFrame.month + "/" + this.newTimeFrame.year;
+        debugger;
+        const httpOptions = {
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+                'Access-Control-Allow-Credentials': true,
+            })
+        };
+
+        let url = this.webServiceUrl + "/monitoring";
+        this.http.post(
+            url,
+            JSON.stringify(deepClassCopy),
+            httpOptions).subscribe(res => {
+                setTimeout(() => { this.progress1 = "0" }, 2000)
+        }, err => null);
+    }
+    //-------------------------------------------------
 
     exportExpenseToCsv() {
         this.progress1 = "1";

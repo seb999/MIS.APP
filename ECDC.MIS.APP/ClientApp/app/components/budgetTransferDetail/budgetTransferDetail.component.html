@@ -1,0 +1,161 @@
+<div class="row">
+    <div class="text-left">
+        <h3>Budget transfer detail</h3>
+    </div>
+    <div class="text-left" style="margin-left:20px;margin-top:7px;padding-bottom:0px">
+        <span *ngIf="!bt"><em>Loading...</em></span>
+    </div>
+</div>
+<div *ngIf="showLoaded" class="overlay"></div>
+<div *ngIf="showLoaded" id="loaderModernize"></div>
+
+<!--Button clear filters-->
+<div style="margin-bottom:10px;float:left;">
+    <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()" [attr.disabled]="!editMode">
+        <span class="btn-label"><i class="fas fa-plus"></i></span> Edit
+    </button>
+</div>
+
+<div style="clear:both"></div>
+
+<div class="row">
+    <div class="col-6">
+
+        <div class="card" style="margin-bottom:15px">
+            <div class="card-header bg-info text-white">
+                Source
+            </div>
+
+            <div class="card-block">
+                <ul class="list-group" style="padding:0px">
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label"></p>
+                        <p class="labelC">
+                            <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()" [attr.disabled]="!editMode">
+                                <span class="btn-label"><i class="far fa-thumbs-up" style="color:limegreen"></i></span> Approve
+                            </button>
+                            <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()" [attr.disabled]="!editMode">
+                                <span class="btn-label"><i class="far fa-thumbs-down" style="color:orangered"></i></span> Reject
+                            </button>
+                        </p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Title I/II</p>
+                        <label class="radio-inline labelC"><input [attr.disabled]="!editMode" type="radio" name="Type1And2Transfer" [(ngModel)]="bt.sourceIsTitle1" ng-value="true" (click)="sourceTitle1()">Title I</label>
+                        <label class="radio-inline labelC"><input [attr.disabled]="!editMode" type="radio" name="Type1And2Transfer" [(ngModel)]="bt.sourceIsTitle2" ng-value="true" (click)="sourceTitle2()">Title II</label>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Activity code</p>
+                        <p class="labelC">{{bt?.sourceActivityCode}}</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Expense name</p>
+                        <p class="labelC">{{bt?.sourceExpenseName}}</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Budget line</p>
+                        <p class="labelC">{{bt?.sourceBudgetLineCode}}</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Expense type</p>
+                        <p class="labelC">{{bt?.sourceExpenseType}}</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Amount</p>
+                        <p class="labelC">{{bt?.sourceAmount}}</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Justification</p>
+                        <p class="labelC">{{bt?.sourceMotivation}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom:15px">
+            <div class="card-header bg-info text-white">
+                Details of the transfer
+            </div>
+
+            <div class="card-block">
+                <ul class="list-group" style="padding:0px">
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label"></p>
+                        <p class="labelC">
+                            <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()" [attr.disabled]="!editMode">
+                                <span class="btn-label"><i class="far fa-thumbs-up" style="color:limegreen"></i></span> Approve
+                            </button>
+                            <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()" [attr.disabled]="!editMode">
+                                <span class="btn-label"><i class="far fa-thumbs-down" style="color:orangered"></i></span> Reject
+                            </button>
+                        </p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Abac reference</p>
+                        <p class="labelC">{{bt?.abacReference}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Amount to transfer</p>
+                        <p class="labelC">{{bt?.amount}}&nbsp;</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="card" style="margin-bottom:15px">
+            <div class="card-header bg-info text-white">
+                Target
+            </div>
+
+            <div class="card-block">
+                <ul class="list-group" style="padding:0px">
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label"></p>
+                        <p class="labelC">
+                            <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()" [attr.disabled]="!editMode">
+                                <span class="btn-label"><i class="far fa-thumbs-up" style="color:limegreen"></i></span> Approve
+                            </button>
+                            <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()" [attr.disabled]="!editMode">
+                                <span class="btn-label"><i class="far fa-thumbs-down" style="color:orangered"></i></span> Reject
+                            </button>
+                        </p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Title I/II</p>
+                        <label class="radio-inline labelC"><input [attr.disabled]="!editMode" type="radio" name="Type1And2Transfer" [(ngModel)]="bt.targetIsTitle1" ng-value="true" (click)="targetTitle1()">Title I</label>
+                        <label class="radio-inline labelC"><input [attr.disabled]="!editMode" type="radio" name="Type1And2Transfer" [(ngModel)]="bt.targetIsTitle2" ng-value="true" (click)="targetTitle2()">Title II</label>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Activity code</p>
+                        <p class="labelC">{{bt?.targetActivityCode}}</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Expense name</p>
+                        <p class="labelC">{{bt?.targetExpenseName}}</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Budget line</p>
+                        <p class="labelC">{{bt?.targetBudgetLineCode}}</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Expense type</p>
+                        <p class="labelC">{{bt?.targetExpenseType}}</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Amount</p>
+                        <p class="labelC">{{bt?.targetAmount}}</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Justification</p>
+                        <p class="labelC">{{bt?.targetMotivation}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+

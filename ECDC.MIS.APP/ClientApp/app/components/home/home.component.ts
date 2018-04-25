@@ -1,6 +1,6 @@
 import { Component, Inject, ElementRef, ViewChild } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import { LookupListItem } from '../shared/lookupListItem';
 import { chart } from 'highcharts';
@@ -16,7 +16,7 @@ import { ChartItem } from '../shared/chartItem';
 
 
 export class HomeComponent {
-    
+
 
     public awpList: LookupListItem[];
     public selectedAwp: LookupListItem;
@@ -41,11 +41,10 @@ export class HomeComponent {
     }
 
     ngOnInit() {
-       this.loadLookupList();
+        this.loadLookupList();
     }
 
     ngAfterViewInit() {
-       
     }
 
     loadLookupList() {
@@ -58,16 +57,15 @@ export class HomeComponent {
                 }
             }
             this.getUserProfile();
-           
+
             this.getUserFte();
         }
-        , err => null);
+            , err => null);
     };
 
     getUserProfile(): any {
         let url = this.webServiceUrl + "/lookupUser/GetCurrentUser";
-        this.http.get(url, { withCredentials:true }).subscribe(data => {
-            
+        this.http.get(url, { withCredentials: true }).subscribe(data => {
             this.userProfile = data.json();
             this.showLoaded = false;
         }, err => null);
@@ -75,7 +73,7 @@ export class HomeComponent {
 
     getUserFte(): any {
         this.showLoaded = true;
-        let url = this.webServiceUrl + "/ExpenseStaff/GetExpenseSatff/" + this.selectedAwp.value;;
+        let url = this.webServiceUrl + "/ExpenseStaff/GetExpenseSatff/" + this.selectedAwp.value;
         this.http.get(url, { withCredentials: true }).subscribe(data => {
             this.expenseStaffList = data.json();
             this.getUserActivity();
@@ -93,26 +91,27 @@ export class HomeComponent {
     }
 
     drawChart() {
-         this.chartSerie1 = new Array<ChartItem>();
+        this.chartSerie1 = new Array<ChartItem>();
         //setup data
         var itemToPush: {};
         console.log(this.expenseStaffList);
         for (var i = 0; i < this.expenseStaffList.length; i++) {
-            if (this.expenseStaffList[i].expenseName.length > 40) {
+            if (this.expenseStaffList[i].expenseName.length > 20) {
                 itemToPush = {
-                    name: this.expenseStaffList[i].expenseName.substring(0, 40) + "...",
-                    y: this.expenseStaffList[i].planDay
+                    name: this.expenseStaffList[i].expenseName.substring(0, 20) + "...",
+                    data: [this.expenseStaffList[i].planDay]
                 }
             }
             else {
                 itemToPush = {
                     name: this.expenseStaffList[i].expenseName,
-                    y: this.expenseStaffList[i].planDay
+                    data: [this.expenseStaffList[i].planDay]
                 }
             }
             this.chartSerie1.push(itemToPush);
+
         }
-  
+
 
         const options: Highcharts.Options = {
             chart: {
@@ -121,35 +120,40 @@ export class HomeComponent {
                 spacingLeft: 15,
                 spacingRight: 15,
                 //backgroundColor:'#f5f5f5',
-                type: 'pie'
+                type: 'bar'
             },
             //colors: ['#00A1E2', '#6769B5', '#3BC3A3', '#93959B', '#2D8F78', '#C3842F', '#005EA4'],
             tooltip: {
+                headerFormat: '<b>{point.y}</b><br/>',
                 pointFormat: '{series.name}: <b>{point.y} days</b>'
             },
             title: {
                 text: ''
             },
-            series: [{
-                name: 'FTE',
-                data: this.chartSerie1,
-            }],
+            series: this.chartSerie1,
             plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
+                series: {
+                    stacking: 'percent',
                     dataLabels: {
                         enabled: true,
-                        format: '{point.y} days',
-                        //style: {
-                        //    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                        //},
-                        connectorColor: 'silver'
+                        color: 'white'
                     }
-                }
+                },
+                //pie: {
+                //    allowPointSelect: true,
+                //    cursor: 'pointer',
+                //    dataLabels: {
+                //        enabled: true,
+                //        format: '{point.y} days',
+                //        //style: {
+                //        //    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                //        //},
+                //        connectorColor: 'silver'
+                //    }
+                //}
             },
         }
-    
+
         this.chart = chart(this.chartTarget.nativeElement, options);
     }
 }

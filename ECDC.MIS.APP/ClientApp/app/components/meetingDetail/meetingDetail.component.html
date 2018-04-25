@@ -1,0 +1,199 @@
+﻿<div class="row">
+    <div class="text-left">
+        <h3>Meeting {{expense?.expenseId}} Activity {{expense?.activityCode}}</h3>
+    </div>
+    <div class="text-left" style="margin-left:20px;margin-top:7px;padding-bottom:0px">
+        <span *ngIf="!expense"><em>Loading...</em></span>
+    </div>
+</div>
+
+<div *ngIf="showLoaded" class="overlay"></div>
+<div *ngIf="showLoaded" id="loaderModernize"></div>
+
+<!--Buttons-->
+<div style="margin-bottom:10px;float:left;">
+    <button type="button" class="btn btn-labeled btn-info btn-sm" (click)="clearFilters()" data-toggle="modal" data-target="#editExpenseModal">
+        <span class="btn-label"><i class="far fa-edit"></i></span> Edit
+    </button>
+
+    <!--<button type="button" class="btn btn-labeled btn-info btn-sm" (click)="previous()" [disabled]="disablePrevious">
+        <i class="fas fa-angle-double-left"></i>
+    </button>
+
+    <button type="button" class="btn btn-info btn-sm" (click)="next()" [disabled]="disableNext">
+        <i class="fas fa-angle-double-right"></i>
+    </button>-->
+</div>
+
+
+<div style="clear:both"></div>
+
+<div class="row">
+    <div class="col-6">
+        <div class="card " style="margin-bottom:15px">
+            <div class="card-header bg-info text-white">
+                Plan
+            </div>
+            <div class="card-block">
+
+                <ul class="list-group" style="padding:0px">
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <div class="row">
+                            <div class="col-3">
+                                <p class="label">Status</p>
+                                <p class="labelC">{{expense?.statusName}}&nbsp;</p>
+                            </div>
+                            <div class="col-5">
+                                <p class="label">Internal code</p>
+                                <p class="labelC">{{expense?.meetingCode}}&nbsp;</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Expense name</p>
+                        <p class="labelC">{{expense?.expenseName}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Budget line</p>
+                        <p class="labelC">{{expense?.budgetLineName}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <div style="float:left">
+                            <p class="label">Organiser</p>
+                            <p class="labelC">{{expense?.organiser}}&nbsp;</p>
+                        </div>
+                        <div style="float:right">
+                            <div class="mx-auto"><img *ngIf="expense?.organiserPicture" src="data:image/JPEG;base64,{{expense?.organiserPicture}}" height="50" class="img-rounded" style="margin-bottom:4px" /></div>
+                        </div>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <div class="row">
+                            <div class="col-3">
+                                <p class="label">Initial amount</p>
+                                <p class="labelC">{{expense?.initialAmount}}&nbsp;</p>
+                            </div>
+                            <div class="col-5">
+                                <p class="label">Current amount</p>
+                                <p class="labelC">{{userProfile?.amount}}&nbsp;</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <div class="row">
+                            <div class="col-3">
+                                <p class="label">Committed amount</p>
+                                <p class="labelC">{{expense?.amountCommitted}}&nbsp;</p>
+                            </div>
+                            <div class="col-5">
+                                <p class="label">Paid amount</p>
+                                <p class="labelC">{{userProfile?.amountPaid}}&nbsp;</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Initiation deadline</p>
+                        <p class="labelC">{{expense?.meetingInitiationDate| date: 'dd/MM/yyyy'}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <div class="row">
+                            <div class="col-3">
+                                <p class="label">Start date</p>
+                                <p class="labelC">{{expense?.meetingStartDate| date: 'dd/MM/yyyy'}}&nbsp;</p>
+                            </div>
+                            <div class="col-5">
+                                <p class="label">End date</p>
+                                <p class="labelC">{{expense?.MeetingEndDate| date: 'dd/MM/yyyy'}}&nbsp;</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Duration</p>
+                        <p class="labelC">{{expense?.meetingDuration}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <div class="row">
+                            <div class="col-3">
+                                <p class="label">External Participant</p>
+                                <p class="labelC">{{expense?.meetingNumExtParticipants}}&nbsp;</p>
+                            </div>
+                            <div class="col-5">
+                                <p class="label">Internal Participant</p>
+                                <p class="labelC">{{expense?.meetingNumIntParticipants}}&nbsp;</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <div class="row">
+                            <div class="col-3">
+                                <p class="label">Country</p>
+                                <p class="labelC">{{expense?.location}}&nbsp;</p>
+                            </div>
+                            <div class="col-5">
+                                <p class="label">City</p>
+                                <p class="labelC">{{expense?.locationCity}}&nbsp;</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Reason outside sweden</p>
+                        <p class="labelC">{{expense?.meetingOutsideSwedenNote}}&nbsp;</p>
+                    </li>
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <p class="label">Other</p>
+                        <p class="labelC">CheckBocx&nbsp;</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+       
+    </div>
+
+    <div class="col-6">
+        <div class="card " style="margin-bottom:15px">
+            <div class="card-header bg-info text-white">
+                Meeting executed
+            </div>
+            <div class="card-block">
+                <ul class="list-group" style="padding:0px">
+                    <li class="list-group-item myLi" style="padding-top:5px;padding-bottom:5px">
+                        <div class="row">
+                            <div class="col-3">
+                                <p class="label">External Participant</p>
+                                <p class="labelC">{{expense?.meetingNumExtParticipantsActual}}&nbsp;</p>
+                            </div>
+                            <div class="col-5">
+                                <p class="label">Internal Participant</p>
+                                <p class="labelC">{{expense?.meetingNumIntParticipantsActual}}&nbsp;</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card " style="margin-bottom:15px">
+            <div class="card-header bg-info text-white">
+                Note
+            </div>
+            <div class="card-block">
+                <textarea type="text" rows="4" class="form-control input-sm" style="width:100%;" [(ngModel)]="expense.meetingComment"></textarea>
+            </div>
+        </div>
+
+        <div class="card " style="margin-bottom:15px">
+            <div class="card-header bg-info text-white">
+                Sub meeting
+            </div>
+            <div class="card-block">
+                
+                Put table here
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

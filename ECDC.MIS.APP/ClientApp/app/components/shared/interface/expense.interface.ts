@@ -11,11 +11,14 @@ export interface Expense {
     endDate?: Date;
     unitId?:number;
     dpId?: number;
+    ownerId?: number;
     projectManagerId?: number;
     authOfficerId?: number;
     procOfficerId?: number;
     procTypeId?: number;
     procStatusId?: number;
+    meetingStatusId?: number;
+    meetingStartMonth: string;
 
     [key: number]: string;
 }

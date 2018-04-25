@@ -27,11 +27,11 @@ export class ActivityComponent {
     public selectedAwp: any;
     public selectedUnit: any;
     public selectedSection: any;
-    public filter: Activity = {} as any;
-
+    
     public showLoaded: boolean;
     public webServiceUrl: string;
     public progress: string = "0";
+    public filter: Activity = {} as any;
 
     constructor(public http: Http, private router: Router, @Inject('WEB_SERVICE_URL') apiUrl: string) {
         //Get web service URL from app.setting page
@@ -90,20 +90,6 @@ export class ActivityComponent {
         }, err => null);
     }
 
-    
-
-    initFilters() {
-        this.filter = {} as any;
-        this.filter.dpId = 0;
-        this.filter.unitId = 0;
-        this.filter.activityCode = "";
-        this.filter.strategyId = 0;
-        this.filter.sectionId = 0;
-        this.filter.activityLeaderId = 0;
-        this.filter.statusId = 0;
-        this.selectedUnit = this.unitList[0];
-    }
-
     unitChanged(){
         this.filter.unitId = this.selectedUnit.value;
         this.sectionList = this.sectionListInitial;
@@ -135,12 +121,24 @@ export class ActivityComponent {
         this.initFilters();
     }
 
+    initFilters() {
+        this.filter = {} as any;
+        this.filter.dpId = 0;
+        this.filter.unitId = 0;
+        this.filter.activityCode = "";
+        this.filter.strategyId = 0;
+        this.filter.sectionId = 0;
+        this.filter.activityLeaderId = 0;
+        this.filter.statusId = 0;
+        this.selectedUnit = this.unitList[0];
+    }
+
     saveFilters() {
-        localStorage.setItem("myFilter", JSON.stringify(this.filter));
+        localStorage.setItem("activityFilter", JSON.stringify(this.filter));
     }
 
     retrieveFilters() {
-        this.filter = JSON.parse(localStorage.getItem('myFilter') || "");
+        this.filter = JSON.parse(localStorage.getItem('activityFilter') || "");
         this.selectedUnit = this.unitList.find(p => p.value == this.filter.unitId);
     }
 

@@ -1,8 +1,13 @@
-<h3>Home</h3>
-
+<div class="row">
+    <div class="text-left">
+        <h3>Home</h3>
+    </div>
+    <div class="text-left" style="margin-left:20px;margin-top:7px;padding-bottom:0px">
+        <span *ngIf="!activityList"><em>Loading...</em></span>
+    </div>
+</div>
 <div *ngIf="showLoaded" class="overlay"></div>
 <div *ngIf="showLoaded" id="loaderModernize"></div>
-<p *ngIf="!activityList"><em>Loading...</em></p>
 
 <!--Year filter-->
 <div class="dropdown" style="float:left;margin-top:7px;">Year&nbsp;</div>
@@ -13,18 +18,15 @@
 </div>
 
 
-        <!--<div class="input-group">
-            <input class="form-control" placeholder="dd/mm/yyyy"
-                   name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-                    <i class="fa fa-calendar-alt"></i>
-                </button> 
-            </div> 
-        </div>--> 
-
-
-
+<!--<div class="input-group">
+    <input class="form-control" placeholder="dd/mm/yyyy"
+           name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+            <i class="fa fa-calendar-alt"></i>
+        </button>
+    </div>
+</div>-->
 <!-- Button trigger modal -->
 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Launch Bootstrap 4 modal
@@ -71,7 +73,7 @@
 <div class="row" style="margin-top:10px">
     <div class="col-3">
         <!--Profile block-->
-        <div class="card ">
+        <div class="card " style="margin-bottom:15px">
             <div class="card-header bg-info text-white">
                 My profile
             </div>
@@ -122,7 +124,7 @@
     </div>
     <div class="col-9">
         <!--My activity-->
-        <div class="card">
+        <div class="card" style="margin-bottom:15px">
             <div class="card-header bg-info text-white">My activities</div>
             <div class="card-block" style="height:100%">
                 <table class="table table-striped table-bordered table-sm" style="margin-bottom:0px">
@@ -162,13 +164,63 @@
             </div>
         </div>
 
+        <!--My  time allocated-->
+        <div class="card" style="margin-bottom:15px">
+            <div class="card-header bg-info text-white">My time allocated</div>
+            <div class="card-block">
+
+                <table class="table table-bordered table-striped table-sm" style="margin-bottom:0px">
+                    <thead>
+                        <tr>
+                            <th>Activity Id</th>
+                            <th>Activity code</th>
+                            <th>Activity name</th>
+                            <th>Expense name</th>
+                            <th>Planned days</th>
+                            <th>Planned FTEs</th>
+                            <th>Days actual</th>
+                            <th>FTEs actual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let expenseStaff of expenseStaffList" style="cursor:pointer" [routerLink]="['/activityDetail', expenseStaff.activityId]">
+                            <td>{{expenseStaff.activityId}}</td>
+                            <td>{{expenseStaff.activityCode}}</td>
+                            <td>{{expenseStaff.activityName}}</td>
+                            <td>{{expenseStaff.expenseName}}</td>
+                            <td>{{expenseStaff.planDay}}</td>
+                            <td>{{expenseStaff.planFte}}</td>
+                            <td>{{expenseStaff.actualDay}}</td>
+                            <td>{{expenseStaff.actualFte}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="padding-left:0px">
+                    <div #chartTarget style="height:160px"></div>
+                </div>
+            </div>
+        </div>
+
+        <!--Chart-->
+        <!--<div class="card " style="margin-bottom:15px">
+            <div class="card-header bg-info text-white">
+                Distribution
+            </div>
+            <div class="card-block">
+                <div style="padding-left:0px">
+                    <div #chartTarget style="height:150px"></div>
+                </div>
+
+            </div>
+        </div>-->
     </div>
 </div>
 <div class="row">&nbsp;</div>
 <div class="row">
     <div class="col-3">
         <!--Chart-->
-        <div class="card ">
+        <!--<div class="card " style="margin-bottom:15px">
             <div class="card-header bg-info text-white">
                 Distribution
             </div>
@@ -178,12 +230,12 @@
                 </div>
 
             </div>
-        </div>
+        </div>-->
     </div>
     <div class="col-9">
 
         <!--My  time allocated-->
-        <div class="card">
+        <!--<div class="card" style="margin-bottom:15px">
             <div class="card-header bg-info text-white">My time allocated</div>
             <div class="card-block">
 
@@ -214,7 +266,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div>-->
     </div>
 </div>
 
